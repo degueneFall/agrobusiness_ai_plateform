@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgroIA - Inscription Nouvel Utilisateur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#0d1b0d] dark:text-[#f8fcf8]">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7f3e7] dark:border-[#204420] px-4 md:px-10 py-3 bg-white dark:bg-[#152a15]">
+<div class="flex items-center gap-4 text-[#0d1b0d] dark:text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] dark:text-white">AgroIA</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Santé des sols</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Cartographie</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Semences</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-[#0d1b0d] text-sm font-bold leading-normal tracking-[0.015em] hover:brightness-105 transition-all">
+<span class="truncate">Connexion</span>
+</button>
+</div>
+</header>
+<!-- Main Content: Split Screen Style for Desktop Registration -->
+<main class="flex-1 flex flex-col md:flex-row items-stretch">
+<!-- Left Side: Branding & Info (Visible on Desktop) -->
+<div class="hidden lg:flex flex-1 bg-cover bg-center relative" data-alt="High-tech agricultural field with drone surveillance visualization" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTwM-nPb7BsMucwsSuzpQe8gYgJVQd-JegJHfgnjRyIbWo4vajqvmZKVLvRkp3aSuBsVxcVvst-_SN-vHIyg9ilVZlbfGy-fcv6lM-jp98z97uSTWB32y-UJwbjs6pJ64Pj1eAofr3_wJH2nHLwvQM_u0ZT0_c9_t1MmO-iK2EDlzxzVYRfxz5jMyNMODysm_-GcMyDyTWamA8-aTdLyaUEuL4cue8s6fvDBnp-NNuxN7p8FrDVBmaKXUT0bXJq1ck0pTrwXFeHOo');">
+<div class="absolute inset-0 bg-background-dark/60 backdrop-blur-sm flex flex-col justify-center px-16 text-white">
+<h1 class="text-5xl font-extrabold leading-tight mb-6">Optimisez votre terre avec l'IA</h1>
+<p class="text-xl font-light leading-relaxed max-w-lg mb-8 opacity-90">
+                            Rejoignez des milliers d'agriculteurs et d'agronomes qui utilisent AgroIA pour transformer les données pédologiques en récoltes abondantes.
+                        </p>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<span>Analyses de sols précises par IA</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">map</span>
+<span>Cartographie topographique avancée</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">grass</span>
+<span>Sélection intelligente de semences</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Registration Form -->
+<div class="flex-1 flex flex-col items-center justify-center p-6 md:p-12 lg:p-20 bg-background-light dark:bg-background-dark overflow-y-auto">
+<div class="w-full max-w-[560px]">
+<div class="mb-10 text-center lg:text-left">
+<h2 class="text-3xl font-bold tracking-tight text-[#0d1b0d] dark:text-white mb-2">Inscription Nouvel Utilisateur</h2>
+<p class="text-gray-600 dark:text-gray-400">Commencez votre voyage vers une agriculture de précision dès aujourd'hui.</p>
+</div>
+<form class="space-y-6">
+<!-- Role Selection -->
+<div>
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4 block">Choisissez votre profil</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<label class="cursor-pointer group">
+<input checked="" class="peer hidden" name="role" type="radio" value="producer"/>
+<div class="flex flex-col items-center justify-center p-4 border-2 border-[#e7f3e7] dark:border-[#204420] rounded-xl peer-checked:border-primary peer-checked:bg-primary/10 transition-all hover:border-primary/50 text-center h-full">
+<span class="material-symbols-outlined text-3xl mb-2 text-gray-500 group-hover:text-primary peer-checked:text-primary">agriculture</span>
+<span class="text-sm font-bold block">Producteur</span>
+<span class="text-[10px] text-gray-500 mt-1">Gérer cultures &amp; sols</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="peer hidden" name="role" type="radio" value="agronomist"/>
+<div class="flex flex-col items-center justify-center p-4 border-2 border-[#e7f3e7] dark:border-[#204420] rounded-xl peer-checked:border-primary peer-checked:bg-primary/10 transition-all hover:border-primary/50 text-center h-full">
+<span class="material-symbols-outlined text-3xl mb-2 text-gray-500 group-hover:text-primary peer-checked:text-primary">biotech</span>
+<span class="text-sm font-bold block">Agronome</span>
+<span class="text-[10px] text-gray-500 mt-1">Analyser &amp; conseiller</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="peer hidden" name="role" type="radio" value="admin"/>
+<div class="flex flex-col items-center justify-center p-4 border-2 border-[#e7f3e7] dark:border-[#204420] rounded-xl peer-checked:border-primary peer-checked:bg-primary/10 transition-all hover:border-primary/50 text-center h-full">
+<span class="material-symbols-outlined text-3xl mb-2 text-gray-500 group-hover:text-primary peer-checked:text-primary">admin_panel_settings</span>
+<span class="text-sm font-bold block">Admin</span>
+<span class="text-[10px] text-gray-500 mt-1">Gestion système</span>
+</div>
+</label>
+</div>
+</div>
+<!-- User Info -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-gray-600 dark:text-gray-400 ml-1" for="first_name">Prénom</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-[#e7f3e7] dark:border-[#204420] bg-white dark:bg-[#152a15] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm" id="first_name" placeholder="Ex: Jean" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-gray-600 dark:text-gray-400 ml-1" for="last_name">Nom</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-[#e7f3e7] dark:border-[#204420] bg-white dark:bg-[#152a15] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm" id="last_name" placeholder="Ex: Dupont" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-gray-600 dark:text-gray-400 ml-1" for="email">Email professionnel</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-[#e7f3e7] dark:border-[#204420] bg-white dark:bg-[#152a15] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm" id="email" placeholder="jean.dupont@ferme.com" type="email"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-gray-600 dark:text-gray-400 ml-1" for="phone">Téléphone</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-[#e7f3e7] dark:border-[#204420] bg-white dark:bg-[#152a15] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm" id="phone" placeholder="+33 6 12 34 56 78" type="tel"/>
+</div>
+<!-- Password with strength indicator -->
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-gray-600 dark:text-gray-400 ml-1" for="password">Mot de passe</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 rounded-lg border border-[#e7f3e7] dark:border-[#204420] bg-white dark:bg-[#152a15] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm pr-10" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-primary" type="button">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+</div>
+<div class="mt-2 flex items-center gap-1.5 px-1">
+<div class="h-1.5 flex-1 rounded-full bg-primary"></div>
+<div class="h-1.5 flex-1 rounded-full bg-primary"></div>
+<div class="h-1.5 flex-1 rounded-full bg-primary/20 dark:bg-white/10"></div>
+<div class="h-1.5 flex-1 rounded-full bg-primary/20 dark:bg-white/10"></div>
+<span class="text-[10px] font-semibold text-primary ml-2">Moyen</span>
+</div>
+</div>
+<!-- Terms & Conditions -->
+<div class="flex items-start gap-3 mt-2">
+<div class="flex items-center h-5">
+<input class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary" id="terms" type="checkbox"/>
+</div>
+<label class="text-xs text-gray-600 dark:text-gray-400 leading-tight" for="terms">
+                                    En m'inscrivant, j'accepte les <a class="text-primary font-medium hover:underline" href="#">Conditions Générales d'Utilisation</a> et la <a class="text-primary font-medium hover:underline" href="#">Politique de Confidentialité</a> d'AgroIA.
+                                </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-3.5 bg-primary text-[#0d1b0d] font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 transition-all text-base" type="submit">
+                                Créer mon compte AgroIA
+                            </button>
+<p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
+                                Déjà utilisateur ? <a class="text-primary font-bold hover:underline" href="#">Se connecter</a>
+</p>
+</form>
+</div>
+</div>
+</main>
+<!-- Footer for Desktop Registration -->
+<footer class="bg-white dark:bg-[#152a15] border-t border-[#e7f3e7] dark:border-[#204420] py-6 px-10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-gray-500 dark:text-gray-400">© 2024 AgroIA Inc. Tous droits réservés.</p>
+<div class="flex gap-6">
+<a class="text-xs text-gray-500 hover:text-primary transition-colors" href="#">Support Technique</a>
+<a class="text-xs text-gray-500 hover:text-primary transition-colors" href="#">Documentation API</a>
+<a class="text-xs text-gray-500 hover:text-primary transition-colors" href="#">Plan du site</a>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-gray-400">language</span>
+<select class="bg-transparent text-xs text-gray-500 border-none focus:ring-0 cursor-pointer">
+<option>Français (FR)</option>
+<option>English (US)</option>
+<option>Español (ES)</option>
+</select>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

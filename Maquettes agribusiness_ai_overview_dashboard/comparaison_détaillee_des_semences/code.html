@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgroAI - Comparaison Détaillée des Semences</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .radar-grid {
+            stroke: #326732;
+            stroke-width: 1;
+        }
+        .radar-area-1 {
+            fill: rgba(19, 236, 19, 0.2);
+            stroke: #13ec13;
+            stroke-width: 2;
+        }
+        .radar-area-2 {
+            fill: rgba(59, 130, 246, 0.2);
+            stroke: #3b82f6;
+            stroke-width: 2;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div class="flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#234823] px-6 lg:px-10 py-3 bg-white dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">agriculture</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">AgroAI</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Santé des sols</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Cartographie</a>
+<a class="text-sm font-medium text-primary border-b-2 border-primary" href="#">Catalogue Semences</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Analyses</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-background-dark text-sm font-bold transition-transform active:scale-95">
+<span>Valider la sélection</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-200 dark:border-[#234823]" data-alt="Avatar utilisateur professionnel agriculture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD94ckgstlXCzeaFIm65mYpIqbZVzZV6YJBpKWc-z90Du8jsLhV4vlzfJdqYPROQCIxHVMSgb7h1prfpmT_X4_XQM-z8hAbXajuOS0HNRoDJ9uZKojO0O1_cKQILiMpMCqY2smJAkYHTpv0YolmLTWQOgOZ3AZeS3spERBcjUCZ3ItK1Zy2xAHBMFVwP50VSCVyTdDMbJOxfFZZld0inF85P8D5ic6GRGWyiHk7gVbtbsx1i9soFX33YRbCcu14ewE29ez-i0wrJ3w");'></div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto w-full p-4 lg:p-10 flex flex-col gap-8">
+<!-- Breadcrumbs and Header -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2 text-slate-500 dark:text-[#92c992]">
+<a class="text-sm font-medium hover:underline" href="#">Semences</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-sm font-medium text-slate-900 dark:text-white">Comparaison détaillée</span>
+</div>
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="max-w-2xl">
+<h1 class="text-3xl lg:text-4xl font-black tracking-tight mb-2">Comparaison Détaillée des Semences</h1>
+<p class="text-slate-600 dark:text-[#92c992] text-base">
+                            Optimisez votre rendement en comparant les performances IA de vos variétés sélectionnées selon vos conditions pédoclimatiques.
+                        </p>
+</div>
+<button class="flex items-center gap-2 rounded-lg h-12 px-6 bg-slate-100 dark:bg-[#234823] text-slate-900 dark:text-white text-sm font-bold border border-slate-200 dark:border-transparent hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined">verified</span>
+<span>Valider la sélection pour ma parcelle</span>
+</button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+<!-- Radar Visualization Card -->
+<div class="xl:col-span-5 flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-[#326732] bg-white dark:bg-background-dark p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-lg font-bold">Profil de Performance</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5">
+<div class="size-3 rounded-full bg-primary"></div>
+<span class="text-xs font-medium">Hybride A</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="size-3 rounded-full bg-blue-500"></div>
+<span class="text-xs font-medium">Bio B</span>
+</div>
+</div>
+</div>
+<div class="relative flex-1 min-h-[300px] flex items-center justify-center">
+<!-- Simulated Radar Chart SVG -->
+<svg class="w-full max-w-[350px]" viewbox="0 0 400 400">
+<!-- Hexagon Grids -->
+<polygon class="radar-grid opacity-20" fill="none" points="200,40 340,120 340,280 200,360 60,280 60,120"></polygon>
+<polygon class="radar-grid opacity-20" fill="none" points="200,100 280,146 280,240 200,286 120,240 120,146"></polygon>
+<polygon class="radar-grid opacity-20" fill="none" points="200,160 220,172 220,200 200,212 180,200 180,172"></polygon>
+<!-- Axes -->
+<line class="radar-grid opacity-20" x1="200" x2="200" y1="200" y2="40"></line>
+<line class="radar-grid opacity-20" x1="200" x2="340" y1="200" y2="120"></line>
+<line class="radar-grid opacity-20" x1="200" x2="340" y1="200" y2="280"></line>
+<line class="radar-grid opacity-20" x1="200" x2="200" y1="200" y2="360"></line>
+<line class="radar-grid opacity-20" x1="200" x2="60" y1="200" y2="280"></line>
+<line class="radar-grid opacity-20" x1="200" x2="60" y1="200" y2="120"></line>
+<!-- Data Area 1 (Hybride A) -->
+<polygon class="radar-area-1" points="200,60 310,140 280,240 200,340 100,240 90,140"></polygon>
+<!-- Data Area 2 (Bio B) -->
+<polygon class="radar-area-2" points="200,120 280,150 320,270 200,290 140,260 120,160"></polygon>
+<!-- Labels -->
+<text class="text-[12px] fill-slate-500 dark:fill-[#92c992]" text-anchor="middle" x="200" y="30">Rendement</text>
+<text class="text-[12px] fill-slate-500 dark:fill-[#92c992]" text-anchor="start" x="350" y="120">Cycle</text>
+<text class="text-[12px] fill-slate-500 dark:fill-[#92c992]" text-anchor="start" x="350" y="290">Eau</text>
+<text class="text-[12px] fill-slate-500 dark:fill-[#92c992]" text-anchor="middle" x="200" y="380">Maladies</text>
+<text class="text-[12px] fill-slate-500 dark:fill-[#92c992]" text-anchor="end" x="50" y="290">Coût</text>
+<text class="text-[12px] fill-slate-500 dark:fill-[#92c992]" text-anchor="end" x="50" y="120">IA Score</text>
+</svg>
+</div>
+<div class="mt-4 p-4 rounded-lg bg-slate-50 dark:bg-[#193319] border border-slate-200 dark:border-[#326732]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<div>
+<p class="text-sm font-bold">Analyse AgroAI</p>
+<p class="text-xs text-slate-600 dark:text-[#92c992]">La Variété Hybride A présente une meilleure résilience hydrique pour vos parcelles sud.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparison Table Card -->
+<div class="xl:col-span-7 overflow-hidden rounded-xl border border-slate-200 dark:border-[#326732] bg-white dark:bg-background-dark">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-[#193319]">
+<th class="p-4 text-sm font-semibold border-b border-slate-200 dark:border-[#326732] w-1/4">Métrique</th>
+<th class="p-4 text-sm font-semibold border-b border-slate-200 dark:border-[#326732]">
+<div class="flex flex-col gap-1">
+<span class="text-primary uppercase text-[10px] tracking-widest">Recommandé</span>
+<span>Variété Hybride A</span>
+</div>
+</th>
+<th class="p-4 text-sm font-semibold border-b border-slate-200 dark:border-[#326732]">Variété Bio B</th>
+<th class="p-4 text-sm font-semibold border-b border-slate-200 dark:border-[#326732]">Variété MaxYield</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-[#326732]">
+<!-- IA Compatibility Score -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-[#193319]/50 transition-colors">
+<td class="p-4 flex items-center gap-2">
+<span class="text-sm font-medium">Compatibilité IA</span>
+<span class="material-symbols-outlined text-xs text-slate-400 cursor-help" title="Calculé via l'historique des sols">info</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-primary">92%</span>
+<div class="flex-1 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 92%"></div>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold">85%</span>
+<div class="flex-1 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-blue-500" style="width: 85%"></div>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold">78%</span>
+<div class="flex-1 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-slate-400" style="width: 78%"></div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Rendement -->
+<tr>
+<td class="p-4 text-sm font-medium">Rendement (T/ha)</td>
+<td class="p-4"><span class="px-3 py-1 rounded bg-primary/10 text-primary text-sm font-bold border border-primary/20">12.5 T/ha</span></td>
+<td class="p-4 text-sm">10.2 T/ha</td>
+<td class="p-4 text-sm font-bold text-primary">14.1 T/ha</td>
+</tr>
+<!-- Cycle de culture -->
+<tr>
+<td class="p-4 text-sm font-medium">Cycle (jours)</td>
+<td class="p-4 text-sm">120 jours</td>
+<td class="p-4 text-sm font-bold">110 jours</td>
+<td class="p-4 text-sm">135 jours</td>
+</tr>
+<!-- Besoins en eau -->
+<tr>
+<td class="p-4 text-sm font-medium">Besoins en eau</td>
+<td class="p-4 text-sm">450 mm</td>
+<td class="p-4 text-sm font-bold">380 mm</td>
+<td class="p-4 text-sm">520 mm</td>
+</tr>
+<!-- Tolérance Maladies -->
+<tr>
+<td class="p-4 text-sm font-medium">Tolérance Maladies</td>
+<td class="p-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-xs font-bold">Haute</span>
+</div>
+</td>
+<td class="p-4 text-xs font-medium text-slate-500">Moyenne</td>
+<td class="p-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-xs font-bold">Très Haute</span>
+</div>
+</td>
+</tr>
+<!-- Coût -->
+<tr>
+<td class="p-4 text-sm font-medium">Coût est. (/ha)</td>
+<td class="p-4 text-sm font-bold">450 €</td>
+<td class="p-4 text-sm text-primary font-bold">390 €</td>
+<td class="p-4 text-sm">550 €</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Detailed Analysis Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 rounded-xl border border-slate-200 dark:border-[#326732] bg-white dark:bg-background-dark/50">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">eco</span>
+<h4 class="font-bold">Hybride A</h4>
+</div>
+<p class="text-sm text-slate-600 dark:text-[#92c992] leading-relaxed">
+                        Meilleure résistance aux stress thermiques. Recommandé pour les sols à faible rétention d'eau. La technologie AI-Synchro optimise la germination à basse température.
+                    </p>
+</div>
+<div class="p-6 rounded-xl border border-slate-200 dark:border-[#326732] bg-white dark:bg-background-dark/50">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-blue-500">compost</span>
+<h4 class="font-bold">Bio B</h4>
+</div>
+<p class="text-sm text-slate-600 dark:text-[#92c992] leading-relaxed">
+                        Certification Bio intégrale. Nécessite moins d'intrants azotés mais demande une surveillance accrue face à la rouille jaune dans vos conditions actuelles.
+                    </p>
+</div>
+<div class="p-6 rounded-xl border border-slate-200 dark:border-[#326732] bg-white dark:bg-background-dark/50">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-slate-400">trending_up</span>
+<h4 class="font-bold">MaxYield</h4>
+</div>
+<p class="text-sm text-slate-600 dark:text-[#92c992] leading-relaxed">
+                        Performance de rendement brute maximale. Attention : besoins en eau 20% supérieurs à la moyenne locale. Risque de stress hydrique élevé sans irrigation contrôlée.
+                    </p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-slate-200 dark:border-[#234823] p-8 bg-white dark:bg-background-dark">
+<div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 opacity-60">
+<span class="material-symbols-outlined">agriculture</span>
+<span class="text-sm">AgroAI Systems © 2024</span>
+</div>
+<div class="flex gap-8 text-sm font-medium opacity-60">
+<a class="hover:text-primary" href="#">Conditions d'utilisation</a>
+<a class="hover:text-primary" href="#">Support Expert IA</a>
+<a class="hover:text-primary" href="#">Confidentialité des données</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

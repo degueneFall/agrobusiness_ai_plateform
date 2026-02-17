@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgroIA - Génération de Rapports Analytiques</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#14b814",
+                        "background-light": "#f8fcf8",
+                        "background-dark": "#112111",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-bar { transition: height 0.3s ease; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0e1b0e] dark:text-white font-display min-h-screen">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7f3e7] dark:border-[#2a3d2a] bg-white dark:bg-[#1a2e1a] px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#14b814]">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h2 class="text-[#0e1b0e] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">AgroIA</h2>
+</div>
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-primary flex border-none bg-[#e7f3e7] dark:bg-[#233a23] items-center justify-center pl-4 rounded-l-lg" data-icon="search">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] dark:text-white focus:outline-0 focus:ring-0 border-none bg-[#e7f3e7] dark:bg-[#233a23] focus:border-none h-full placeholder:text-[#4e974e] px-4 rounded-l-none border-l-0 pl-2 text-sm" placeholder="Rechercher un champ..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-9">
+<a class="text-[#4e974e] dark:text-[#a5d6a5] text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-[#4e974e] dark:text-[#a5d6a5] text-sm font-medium hover:text-primary transition-colors" href="#">Cartographie</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Analyses</a>
+<a class="text-[#4e974e] dark:text-[#a5d6a5] text-sm font-medium hover:text-primary transition-colors" href="#">Paramètres</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-10 bg-[#e7f3e7] dark:bg-[#233a23] text-[#0e1b0e] dark:text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="Portrait of an agricultural specialist" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB3LeORZkx44fcS1sebDrWrQyv7mquDKdgMS_TwzZ-HueZAVSd3vp3kuxHKfRbwywvKp5rxSDelbxkQM1brB-HaY5xW84Wb5pQjDdpsfiRCWs1wmOjXYeilgOOYWjgAm9ZyGDEkiaqQaMGKO0qpbZHxw09QIY1ehcj4LuHSGRHsoWblMFwk0EV0x6oSm0MLH4RLo93bVJwKdhm6IfnrcBvl-qu8vYUZRDTSexRnQjigk-YufLzcxdlmjWxWAws58B8a-YqbYfbqfqc");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-[1280px] mx-auto w-full p-6 md:p-10">
+<!-- Header Section -->
+<div class="flex flex-wrap justify-between items-end gap-6 mb-8">
+<div class="flex flex-col gap-2">
+<nav class="flex items-center gap-2 text-sm text-[#4e974e] mb-1">
+<a class="hover:underline" href="#">Analyses</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-[#0e1b0e] dark:text-white font-medium">Générateur de Rapport</span>
+</nav>
+<h1 class="text-[#0e1b0e] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Génération de Rapports Analytiques</h1>
+<p class="text-[#4e974e] dark:text-[#a5d6a5] text-base">Rapports prédictifs basés sur l'IA pour optimiser vos rendements et la santé des sols.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 rounded-lg h-11 px-6 bg-white dark:bg-[#1a2e1a] border border-[#d0e7d0] dark:border-[#2a3d2a] text-[#0e1b0e] dark:text-white text-sm font-bold hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined text-xl">description</span>
+                        Exporter Excel
+                    </button>
+<button class="flex items-center gap-2 rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-[#12a312] transition-colors">
+<span class="material-symbols-outlined text-xl">picture_as_pdf</span>
+                        Générer PDF
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Configuration Sidebar -->
+<aside class="lg:col-span-3 space-y-6">
+<div class="bg-white dark:bg-[#1a2e1a] p-6 rounded-xl border border-[#e7f3e7] dark:border-[#2a3d2a] shadow-sm">
+<h3 class="text-[#0e1b0e] dark:text-white font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">tune</span>
+                            Configuration
+                        </h3>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-bold text-[#4e974e] uppercase tracking-wider mb-2">Période</label>
+<select class="w-full bg-[#f8fcf8] dark:bg-[#233a23] border-[#d0e7d0] dark:border-[#2a3d2a] rounded-lg text-sm focus:ring-primary focus:border-primary">
+<option>Saison Actuelle (2024)</option>
+<option>Saison Dernière (2023)</option>
+<option>Historique 5 ans</option>
+<option>Personnalisé</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-[#4e974e] uppercase tracking-wider mb-2">Zone Géographique</label>
+<div class="relative">
+<select class="w-full bg-[#f8fcf8] dark:bg-[#233a23] border-[#d0e7d0] dark:border-[#2a3d2a] rounded-lg text-sm focus:ring-primary focus:border-primary">
+<option>Secteur Nord - Parcelle A12</option>
+<option>Secteur Est - Parcelle B04</option>
+<option>Toutes les parcelles</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-[#4e974e] uppercase tracking-wider mb-2">Type de Rapport</label>
+<div class="grid grid-cols-1 gap-2">
+<button class="flex items-center gap-3 px-4 py-3 rounded-lg border-2 border-primary bg-primary/5 text-primary text-sm font-bold text-left">
+<span class="material-symbols-outlined">trending_up</span>
+                                        Rendement
+                                    </button>
+<button class="flex items-center gap-3 px-4 py-3 rounded-lg border border-[#d0e7d0] dark:border-[#2a3d2a] text-[#4e974e] text-sm font-medium text-left hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">grass</span>
+                                        Santé des sols
+                                    </button>
+<button class="flex items-center gap-3 px-4 py-3 rounded-lg border border-[#d0e7d0] dark:border-[#2a3d2a] text-[#4e974e] text-sm font-medium text-left hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">payments</span>
+                                        Rentabilité
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 dark:bg-primary/5 p-4 rounded-xl border border-primary/20">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<div>
+<p class="text-xs font-bold text-primary uppercase">IA Insight</p>
+<p class="text-sm text-[#0e1b0e] dark:text-white mt-1">Le rendement prévu est 12% supérieur à la moyenne grâce aux conditions météo favorables.</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Report Preview -->
+<div class="lg:col-span-9 space-y-6">
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-white dark:bg-[#1a2e1a] p-5 rounded-xl border border-[#e7f3e7] dark:border-[#2a3d2a] shadow-sm">
+<p class="text-[#4e974e] text-sm font-medium">Rendement Estimé</p>
+<div class="flex items-end gap-2 mt-1">
+<span class="text-2xl font-black text-[#0e1b0e] dark:text-white">8.4 t/ha</span>
+<span class="text-primary text-sm font-bold flex items-center">+4.2%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2e1a] p-5 rounded-xl border border-[#e7f3e7] dark:border-[#2a3d2a] shadow-sm">
+<p class="text-[#4e974e] text-sm font-medium">Santé du Sol (pH)</p>
+<div class="flex items-end gap-2 mt-1">
+<span class="text-2xl font-black text-[#0e1b0e] dark:text-white">6.8</span>
+<span class="text-orange-500 text-sm font-bold">Optimal</span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2e1a] p-5 rounded-xl border border-[#e7f3e7] dark:border-[#2a3d2a] shadow-sm">
+<p class="text-[#4e974e] text-sm font-medium">Confiance IA</p>
+<div class="flex items-end gap-2 mt-1">
+<span class="text-2xl font-black text-[#0e1b0e] dark:text-white">94%</span>
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+</div>
+</div>
+</div>
+<!-- Main Report Preview Area -->
+<div class="bg-white dark:bg-[#1a2e1a] rounded-2xl border-2 border-[#e7f3e7] dark:border-[#2a3d2a] shadow-xl overflow-hidden">
+<div class="bg-[#f8fcf8] dark:bg-[#233a23] border-b border-[#e7f3e7] dark:border-[#2a3d2a] px-8 py-4 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<span class="text-sm font-bold uppercase tracking-widest text-[#4e974e]">Aperçu du Rapport de Rendement</span>
+</div>
+<span class="text-xs text-[#4e974e]">Dernière mise à jour: Aujourd'hui, 09:42</span>
+</div>
+<div class="p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<!-- Bar Chart Mock -->
+<div>
+<h4 class="text-[#0e1b0e] dark:text-white font-bold mb-6">Évolution Historique des Rendements (t/ha)</h4>
+<div class="flex items-end justify-between h-48 gap-2 px-2 border-b-2 border-[#e7f3e7] dark:border-[#2a3d2a]">
+<div class="flex flex-col items-center flex-1">
+<div class="bg-primary/20 w-full rounded-t-lg h-[60%]" title="2020: 5.1"></div>
+<span class="text-[10px] text-[#4e974e] mt-2 font-bold">2020</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="bg-primary/40 w-full rounded-t-lg h-[75%]" title="2021: 6.4"></div>
+<span class="text-[10px] text-[#4e974e] mt-2 font-bold">2021</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="bg-primary/60 w-full rounded-t-lg h-[65%]" title="2022: 5.8"></div>
+<span class="text-[10px] text-[#4e974e] mt-2 font-bold">2022</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="bg-primary/80 w-full rounded-t-lg h-[85%]" title="2023: 7.2"></div>
+<span class="text-[10px] text-[#4e974e] mt-2 font-bold">2023</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="bg-primary w-full rounded-t-lg h-[95%] relative group" title="2024 (IA): 8.4">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">8.4</div>
+</div>
+<span class="text-[10px] text-primary mt-2 font-bold">2024*</span>
+</div>
+</div>
+<p class="text-[10px] text-center mt-4 text-[#4e974e] italic">* Prédiction basée sur l'analyse IA AgroIA</p>
+</div>
+<!-- Pie Chart Mock -->
+<div>
+<h4 class="text-[#0e1b0e] dark:text-white font-bold mb-6">Répartition des Cultures (Surface)</h4>
+<div class="flex items-center gap-8">
+<div class="relative size-40">
+<svg class="size-full -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-[#e7f3e7] dark:stroke-[#233a23]" cx="18" cy="18" fill="none" r="16" stroke-width="4"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="65 100" stroke-linecap="round" stroke-width="4"></circle>
+<circle class="stroke-[#4e974e]" cx="18" cy="18" fill="none" r="16" stroke-dasharray="25 100" stroke-dashoffset="-65" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-black text-[#0e1b0e] dark:text-white">450</span>
+<span class="text-[10px] text-[#4e974e] font-bold uppercase">Hectares</span>
+</div>
+</div>
+<div class="flex-1 space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-primary"></div>
+<span class="text-sm text-[#4e974e]">Maïs Hybride</span>
+</div>
+<span class="text-sm font-bold text-[#0e1b0e] dark:text-white">65%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-[#4e974e]"></div>
+<span class="text-sm text-[#4e974e]">Soja</span>
+</div>
+<span class="text-sm font-bold text-[#0e1b0e] dark:text-white">25%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-[#e7f3e7] dark:bg-[#2a3d2a]"></div>
+<span class="text-sm text-[#4e974e]">Blé</span>
+</div>
+<span class="text-sm font-bold text-[#0e1b0e] dark:text-white">10%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-[#e7f3e7] dark:border-[#2a3d2a]">
+<h4 class="text-[#0e1b0e] dark:text-white font-bold mb-4">Recommandations de l'IA pour la Prochaine Saison</h4>
+<div class="bg-[#f8fcf8] dark:bg-[#233a23] p-6 rounded-xl space-y-4">
+<div class="flex gap-4">
+<div class="bg-primary/20 text-primary size-10 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<div>
+<p class="font-bold text-[#0e1b0e] dark:text-white">Optimisation de l'Irrigation</p>
+<p class="text-sm text-[#4e974e]">Augmenter le débit de 5% dans le quadrant Nord-Est pour compenser l'évaporation accrue prévue en Juillet.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="bg-primary/20 text-primary size-10 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">science</span>
+</div>
+<div>
+<p class="font-bold text-[#0e1b0e] dark:text-white">Apport en Nutriments</p>
+<p class="text-sm text-[#4e974e]">Ajout ciblé d'Azote retardé de 10 jours par rapport au calendrier standard pour s'aligner sur la croissance foliaire.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

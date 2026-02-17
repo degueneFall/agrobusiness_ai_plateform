@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriAI Pro - Catalogue de Semences Intelligent</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234823;
+            border-radius: 10px;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            background: #234823;
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #13ec13;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(19, 236, 19, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex flex-col border-r border-slate-200 dark:border-emerald-900/30 bg-white dark:bg-[#112211] shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">potted_plant</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-base font-bold leading-tight">AgriAI Pro</h1>
+<p class="text-xs text-slate-500 dark:text-emerald-500/80 uppercase tracking-widest font-semibold">Intelligence</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-emerald-900/20 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+<span class="text-sm font-medium">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary bg-primary/10 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">inventory_2</span>
+<span class="text-sm font-medium">Catalogue de Semences</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-emerald-900/20 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">map</span>
+<span class="text-sm font-medium">Cartographie du Sol</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-emerald-900/20 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">bar_chart</span>
+<span class="text-sm font-medium">Analyses de Rendement</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-emerald-900/20 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">auto_awesome</span>
+<span class="text-sm font-medium">Recommandations AI</span>
+</a>
+<div class="pt-6 pb-2 px-3">
+<h3 class="text-[10px] font-bold text-slate-400 dark:text-emerald-800 uppercase tracking-widest">Filtres Avancés AI</h3>
+</div>
+<div class="space-y-6 px-3 py-2">
+<!-- Soil Type -->
+<div class="space-y-3">
+<label class="text-xs font-semibold text-slate-500 dark:text-slate-400">TYPE DE SOL</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-2 py-1 rounded text-[11px] font-medium bg-primary text-background-dark">Argileux</button>
+<button class="px-2 py-1 rounded text-[11px] font-medium bg-slate-100 dark:bg-emerald-900/30 text-slate-400">Sableux</button>
+<button class="px-2 py-1 rounded text-[11px] font-medium bg-slate-100 dark:bg-emerald-900/30 text-slate-400">Limoneux</button>
+<button class="px-2 py-1 rounded text-[11px] font-medium bg-slate-100 dark:bg-emerald-900/30 text-slate-400">Humifère</button>
+</div>
+</div>
+<!-- pH Slider -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<label class="text-xs font-semibold text-slate-500 dark:text-slate-400">PLAGE DE PH</label>
+<span class="text-[10px] bg-primary/20 text-primary px-1.5 rounded">6.5 - 7.5</span>
+</div>
+<input class="w-full cursor-pointer accent-primary" max="14" min="0" type="range" value="7"/>
+<div class="flex justify-between text-[10px] text-slate-500">
+<span>0 Acide</span>
+<span>14 Base</span>
+</div>
+</div>
+<!-- Water Requirements -->
+<div class="space-y-3">
+<label class="text-xs font-semibold text-slate-500 dark:text-slate-400">BESOINS EN EAU</label>
+<div class="grid grid-cols-3 gap-1 bg-slate-100 dark:bg-emerald-900/20 p-1 rounded-lg">
+<button class="text-[10px] py-1 rounded font-medium text-slate-400">BAS</button>
+<button class="text-[10px] py-1 rounded font-medium bg-white dark:bg-emerald-800 text-primary">MED</button>
+<button class="text-[10px] py-1 rounded font-medium text-slate-400">HAUT</button>
+</div>
+</div>
+<!-- Expected Yield -->
+<div class="space-y-3">
+<label class="text-xs font-semibold text-slate-500 dark:text-slate-400">RENDEMENT ATTENDU</label>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded border-slate-300 dark:border-emerald-800 text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+<span class="text-xs text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">Premium (&gt;12 t/ha)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-slate-300 dark:border-emerald-800 text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+<span class="text-xs text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">Standard (8-12 t/ha)</span>
+</label>
+</div>
+</div>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-emerald-900/30">
+<div class="flex items-center gap-3 p-2 bg-slate-50 dark:bg-emerald-900/10 rounded-xl">
+<img class="size-10 rounded-full object-cover border-2 border-primary/20" data-alt="Portrait of an agronomist professional" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuUWLgWm3x9KuyJqPDE-0R_DDp8Q9Hz_YUyLRqHwIZeSWQYwRI16FhqPwoU7kXoAFtO6zW_KaNV2YT3yoAWJ-jxKXX3FptzXhQDqOVoyNKfL8UZjW3H6uffjvXID_S6Ovv98JPZAud5IW943Mi53mivb9Mt5d3i_F9KRg11Dy2PCzFPEABn2cL5oyb1jxLZCjT04jpWrYM3BX0Kj9O_IRNkE_2H8deyI5_xtakGHMhHo_YLH1ns2PiAK9MbXhVbZF5X8dwKKNRYEM"/>
+<div class="flex flex-col min-w-0">
+<p class="text-sm font-semibold truncate">Jean Dupont</p>
+<p class="text-[10px] text-emerald-600 uppercase font-bold tracking-tight">Expert Agricole</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark overflow-hidden">
+<!-- Top Utility Bar -->
+<header class="h-20 border-b border-slate-200 dark:border-emerald-900/20 px-8 flex items-center justify-between gap-4 bg-white/50 dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-10">
+<div class="flex-1 max-w-xl relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-emerald-900/10 border-slate-200 dark:border-emerald-900/30 rounded-xl text-sm focus:ring-primary focus:border-primary placeholder:text-slate-400" placeholder="Rechercher variétés, cultures ou traits..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-white dark:bg-emerald-900/10 border border-slate-200 dark:border-emerald-900/30 rounded-xl p-1">
+<button class="px-4 py-1.5 text-xs font-semibold bg-primary text-background-dark rounded-lg shadow-sm">Grid</button>
+<button class="px-4 py-1.5 text-xs font-semibold text-slate-500 hover:text-primary transition-colors">Liste</button>
+</div>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary text-background-dark rounded-xl font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-lg">compare_arrows</span>
+                        Comparer (0)
+                    </button>
+<button class="size-10 flex items-center justify-center border border-slate-200 dark:border-emerald-900/30 rounded-xl text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Seed Cards Grid -->
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-3xl font-bold tracking-tight">Catalogue de Semences</h2>
+<p class="text-slate-500 mt-1">42 variétés optimisées pour vos parcelles actuelles.</p>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1.5 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-primary text-[11px] font-bold rounded-full border border-emerald-200 dark:border-emerald-500/20">
+<span class="size-1.5 bg-primary rounded-full animate-pulse"></span>
+                            Analyse de sol: Parcelle A - ACTIVE
+                        </span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="group relative flex flex-col bg-white dark:bg-[#1a2e1a] rounded-2xl border border-slate-200 dark:border-emerald-900/30 overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close up of vibrant green corn crop leaves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBGyJRv_grpcmHskucqsMZI94p72uO5UgIbZriLRAv8aYL2KeFn7LRbTbn72YiZY7pVyZXulb86zA4CPjUOFFb9B0mvpU2Buoj0uRsSlnNYVNOxFcpMz8sACddzIcL_gIc51GUp9IjTjb-uv1Fn8Un0iScviYSeQsHGs5qPOKzBiD10Mk_E7BYyha71gVQl21fs6ecnJP6beOwq8kX08i-BeoIPf9dUC_Jkodpm1OlImaZvA5I7TLIZB-_xLRXzI5jJStpfji2hPU"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-primary/90 text-background-dark text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md">98% COMPATIBLE</span>
+</div>
+<label class="absolute top-3 right-3">
+<input class="size-5 rounded-full border-2 border-white/50 bg-black/20 text-primary focus:ring-0 cursor-pointer" type="checkbox"/>
+</label>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3">
+<p class="text-xs text-emerald-400 font-bold tracking-wide uppercase">Maïs Hybride</p>
+<h3 class="text-lg font-bold text-white">Z-45 Ultra Power</h3>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-slate-50 dark:bg-emerald-900/10 p-2 rounded-lg border border-slate-100 dark:border-emerald-900/20">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Rendement</p>
+<p class="text-sm font-bold text-primary">14.2 t/ha</p>
+</div>
+<div class="bg-slate-50 dark:bg-emerald-900/10 p-2 rounded-lg border border-slate-100 dark:border-emerald-900/20">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Cycle</p>
+<p class="text-sm font-bold">110 Jours</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="text-[9px] px-2 py-0.5 bg-slate-100 dark:bg-emerald-900/30 rounded text-slate-500">Résistant Sécheresse</span>
+<span class="text-[9px] px-2 py-0.5 bg-slate-100 dark:bg-emerald-900/30 rounded text-slate-500">Azote Économe</span>
+</div>
+<button class="w-full py-2 bg-slate-100 dark:bg-emerald-800/40 hover:bg-primary hover:text-background-dark transition-all rounded-lg text-xs font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                Détails Variété
+                            </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col bg-white dark:bg-[#1a2e1a] rounded-2xl border border-slate-200 dark:border-emerald-900/30 overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Macro photo of high quality wheat ears" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwZdeMZRwc0RG7whI41tkiBZgmIfxF62_No5eDpie6OHA70HSOo3dXZ4e5ALmXJDNZ5hEVYU_ItskpA-yIZfYYutu75xLGXPy9t8u3FxAsbDLyVEqFyQqhzTTOw2Lx0te--fzfR6xO2Udy5j6gDyq4BegaYpF9J3RRPvR8u8x7hU1oRpT5-utpF-qEIMR-0Ja7XivccFtzeXKG8-jmEWKfr72FEgR4vlV7DNO4eN1YZGvkcdC3A8CapBRkJxCCRag71LTzwOz_M04"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-amber-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">85% COMPATIBLE</span>
+</div>
+<label class="absolute top-3 right-3">
+<input class="size-5 rounded-full border-2 border-white/50 bg-black/20 text-primary focus:ring-0 cursor-pointer" type="checkbox"/>
+</label>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3">
+<p class="text-xs text-emerald-400 font-bold tracking-wide uppercase">Blé Tendre</p>
+<h3 class="text-lg font-bold text-white">Amber Wave X</h3>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-slate-50 dark:bg-emerald-900/10 p-2 rounded-lg border border-slate-100 dark:border-emerald-900/20">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Rendement</p>
+<p class="text-sm font-bold text-primary">9.5 t/ha</p>
+</div>
+<div class="bg-slate-50 dark:bg-emerald-900/10 p-2 rounded-lg border border-slate-100 dark:border-emerald-900/20">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Cycle</p>
+<p class="text-sm font-bold">240 Jours</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="text-[9px] px-2 py-0.5 bg-slate-100 dark:bg-emerald-900/30 rounded text-slate-500">Protéines Élevées</span>
+<span class="text-[9px] px-2 py-0.5 bg-slate-100 dark:bg-emerald-900/30 rounded text-slate-500">Hivernal</span>
+</div>
+<button class="w-full py-2 bg-slate-100 dark:bg-emerald-800/40 hover:bg-primary hover:text-background-dark transition-all rounded-lg text-xs font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                Détails Variété
+                            </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col bg-white dark:bg-[#1a2e1a] rounded-2xl border border-slate-200 dark:border-emerald-900/30 overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Field of blooming soybeans in late summer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtN0osWIOd4irDMR2npJ5rHkNyP7AAn63LIcrvlJASPIvI_2Vt2c7cwv1cHBJqXqRMECk-ymgO6GhkYoay8lqbZczQ-Ofxo2of_e_kwNEys0UUJHx29pB49PH1DeWNkH2pP5EvTgYEKBzlVQ8tBvryrGL9NP_VL8u41Iihmom_XXVJTbuXFfvdnAQMctSLJsDSv4QgL6Kn1YTiuxyOOWKPgWMNRt01IkiOrvYAR1ySr-t40kWghRx7hPvNmAnc_ByB_dF61-Klcks"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-primary/90 text-background-dark text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md">92% COMPATIBLE</span>
+</div>
+<label class="absolute top-3 right-3">
+<input class="size-5 rounded-full border-2 border-white/50 bg-black/20 text-primary focus:ring-0 cursor-pointer" type="checkbox"/>
+</label>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3">
+<p class="text-xs text-emerald-400 font-bold tracking-wide uppercase">Soja</p>
+<h3 class="text-lg font-bold text-white">GreenGold S-1</h3>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-slate-50 dark:bg-emerald-900/10 p-2 rounded-lg border border-slate-100 dark:border-emerald-900/20">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Rendement</p>
+<p class="text-sm font-bold text-primary">4.8 t/ha</p>
+</div>
+<div class="bg-slate-50 dark:bg-emerald-900/10 p-2 rounded-lg border border-slate-100 dark:border-emerald-900/20">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Cycle</p>
+<p class="text-sm font-bold">135 Jours</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="text-[9px] px-2 py-0.5 bg-slate-100 dark:bg-emerald-900/30 rounded text-slate-500">Fixateur Azote</span>
+<span class="text-[9px] px-2 py-0.5 bg-slate-100 dark:bg-emerald-900/30 rounded text-slate-500">Haut Huile</span>
+</div>
+<button class="w-full py-2 bg-slate-100 dark:bg-emerald-800/40 hover:bg-primary hover:text-background-dark transition-all rounded-lg text-xs font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                Détails Variété
+                            </button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative flex flex-col bg-white dark:bg-[#1a2e1a] rounded-2xl border border-slate-200 dark:border-emerald-900/30 overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Sunflowers growing in an open agricultural field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvDt36tksAcfPjA9mNqqnpywo3D0iOFp25sGGOIhZ2JJp2iP4oxwPjXL2lZYYN0UnD6i8OwqPPKD2n1YP3Lt2YV6Rf7fM8Imk5PXrBiTTSy8a0_0rpQ2dQ1bfhYH6rbE2K_94Yi_E6PWEpOmFQP4Kg9AjNxRs2CjzfFE7nYh4OXGJTUF9LWJcpqR_7qk10bE3yJpMSICB447RRYZScLbUMhss6DMVg2EnugSOyHaWd9jXb4BBTKbLDKRUCicYxomzFpowFB_TNxmM"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-red-500/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">65% COMPATIBLE</span>
+</div>
+<label class="absolute top-3 right-3">
+<input class="size-5 rounded-full border-2 border-white/50 bg-black/20 text-primary focus:ring-0 cursor-pointer" type="checkbox"/>
+</label>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3">
+<p class="text-xs text-emerald-400 font-bold tracking-wide uppercase">Tournesol</p>
+<h3 class="text-lg font-bold text-white">Helios Sun-8</h3>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-slate-50 dark:bg-emerald-900/10 p-2 rounded-lg border border-slate-100 dark:border-emerald-900/20">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Rendement</p>
+<p class="text-sm font-bold text-primary">3.2 t/ha</p>
+</div>
+<div class="bg-slate-50 dark:bg-emerald-900/10 p-2 rounded-lg border border-slate-100 dark:border-emerald-900/20">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Cycle</p>
+<p class="text-sm font-bold">105 Jours</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="text-[9px] px-2 py-0.5 bg-slate-100 dark:bg-emerald-900/30 rounded text-slate-500">Tolérance Sclérotinia</span>
+</div>
+<button class="w-full py-2 bg-slate-100 dark:bg-emerald-800/40 hover:bg-primary hover:text-background-dark transition-all rounded-lg text-xs font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                Détails Variété
+                            </button>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-12 flex justify-center">
+<button class="flex items-center gap-2 px-8 py-3 bg-white dark:bg-emerald-900/20 border border-slate-200 dark:border-emerald-900/30 rounded-full text-sm font-bold hover:border-primary transition-colors group">
+                        Charger plus de variétés
+                        <span class="material-symbols-outlined text-lg group-hover:translate-y-0.5 transition-transform">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<!-- Comparison Bar (Conditional Overlay placeholder) -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-6 px-6 py-4 bg-background-dark/80 backdrop-blur-xl border border-primary/30 rounded-2xl shadow-2xl shadow-primary/20 invisible group-selection-active:visible">
+<div class="flex items-center gap-4">
+<div class="flex -space-x-3">
+<img class="size-10 rounded-full border-2 border-primary object-cover" data-alt="Seed selection 1 icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmCRo9sLfBwsK2lj_0JbVG2WEZNxZQ-JDdACfZrOnYUoDVeCKgsaHCWLf2CsRsIxdMzjsZLZmVPorsrHFKw75j8D8uSdbcxWgSf2qALJPMT9uOJnlfuIloCIR9lg-RmrSKdynMaDViyY6D8H99gYL-E1MUalw8gemDPFpuHTNF1iKwuKnShVnTINsO00s6L540mnWCwREXO-o1TqxZZiLbzXSMpuGwg3vEOHa7mVGm6YG24w_JA3VnDP1fV4b-m3R3Zox-lzHYP80"/>
+<img class="size-10 rounded-full border-2 border-primary object-cover" data-alt="Seed selection 2 icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWeSgfIkehOH_Y9QuGmvDe5QMgSi_ZkVGuRgdChZeVfRVDlZxet8PgdUFKOTQWTGTTGWlP481QxCJ_msMTsgUydmO1UtY-2IvYvLLS2R52soZKDAoSfvBoQRCUm0bWBu61dijE1nCYv1vqKt3Ng61ucJHU5Ay6jAoKk5C1RNzrl0rmnRsQaUkHNQf8q3iFJtdgBCTVeopd-ftjhdisSeqAv_OnnuaQEKzyr-9boPxMN9w97hlsNE2nzhRjGHFMtVuVZvlUu2f03H8"/>
+</div>
+<p class="text-sm font-bold text-white">2 variétés sélectionnées</p>
+</div>
+<div class="h-8 w-px bg-white/20"></div>
+<button class="px-6 py-2 bg-primary text-background-dark rounded-xl font-bold text-sm">Lancer la Comparaison</button>
+</div>
+</main>
+</div>
+</body></html>

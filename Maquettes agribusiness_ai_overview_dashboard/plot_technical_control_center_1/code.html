@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centre de Contrôle Technique des Parcelles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gauge-container {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+        }
+        .gauge-arc {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 12px solid #234823;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            transform: rotate(-45deg);
+        }
+        .gauge-fill {
+            position: absolute;
+            top: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 12px solid #13ec13;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            transform: rotate(15deg);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #102210;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234823;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#234823] px-6 py-3 bg-white dark:bg-background-dark">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Centre de Contrôle</h2>
+</div>
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-400 dark:text-[#92c992] flex border-none bg-slate-100 dark:bg-[#234823] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-[#234823] focus:border-none h-full placeholder:text-slate-400 dark:placeholder:text-[#92c992] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal" placeholder="Rechercher des parcelles..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-primary text-sm font-semibold" href="#">Tableau de bord</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Cartes</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Analyses</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Rapports</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#234823] text-slate-600 dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#234823] text-slate-600 dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-primary" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDT-had65s5xf4lK3qNJBD3gKMFsnxfdp-vJg1nizDBTk2fWq_3HvsQC2miBSRkdf-Xxvapg8596fZwd1iCwNuzxjrzrKcuhKhRdjq32BOdvsCi1SzsiFD8jtOG3tGVUXl1gJ6_kE3Gnz5a0GEusvJ7OZSc2NlepGlPPxUHBBazeuAf6R_zof9VuilxXEuH0g7WUmrNx2g0EsXaGjkSICA3jrfDK6_iv1wck9wqyPOGtK0j7MXZpbxqtGlZTlNcKHGyjJobLUmImhA");'></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-72 border-r border-slate-200 dark:border-[#234823] bg-white dark:bg-background-dark flex flex-col">
+<div class="p-4 border-b border-slate-200 dark:border-[#234823]">
+<h1 class="text-slate-900 dark:text-white text-sm font-bold uppercase tracking-wider">Parcelles Actives</h1>
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-normal">8 parcelles surveillées</p>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 border border-primary/20 group cursor-pointer">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">map</span>
+<div class="flex-1">
+<p class="text-primary text-sm font-bold">Parcelle A-102</p>
+<p class="text-primary/70 text-[10px] font-medium uppercase tracking-tighter">Maïs • 12.5 Ha</p>
+</div>
+<div class="size-2 rounded-full bg-primary animate-pulse"></div>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-[#234823]/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">map</span>
+<div class="flex-1">
+<p class="text-slate-700 dark:text-slate-200 text-sm font-semibold">Parcelle B-205</p>
+<p class="text-slate-400 text-[10px] font-medium uppercase tracking-tighter">Soja • 8.2 Ha</p>
+</div>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-[#234823]/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">map</span>
+<div class="flex-1">
+<p class="text-slate-700 dark:text-slate-200 text-sm font-semibold">Parcelle C-088</p>
+<p class="text-slate-400 text-[10px] font-medium uppercase tracking-tighter">Blé • 15.0 Ha</p>
+</div>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-[#234823]/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">map</span>
+<div class="flex-1">
+<p class="text-slate-700 dark:text-slate-200 text-sm font-semibold">Parcelle D-112</p>
+<p class="text-slate-400 text-[10px] font-medium uppercase tracking-tighter">Jachère • 5.5 Ha</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-primary/5 border-t border-slate-200 dark:border-[#234823]">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+<span class="text-[11px] font-bold text-primary uppercase">Suggestion IA</span>
+</div>
+<p class="text-xs text-slate-600 dark:text-[#92c992] leading-relaxed">Moment optimal pour l'épandage d'azote dans 48h selon les prévisions de pluie.</p>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-slate-50 dark:bg-background-dark p-6 flex flex-col gap-6">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded bg-primary text-background-dark text-[10px] font-bold uppercase tracking-widest">Surveillance Active</span>
+<span class="text-slate-500 dark:text-slate-400 text-xs font-mono">34.0522° N, 118.2437° W</span>
+</div>
+<h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Centre de Contrôle Technique des Parcelles</h2>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-white dark:bg-[#234823] text-slate-700 dark:text-white px-4 py-2 rounded-lg border border-slate-200 dark:border-transparent text-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Exporter les données
+                </button>
+<button class="flex items-center gap-2 bg-primary text-background-dark px-6 py-2 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">description</span>
+                    Générer un rapport
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-[#234823] p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-bold uppercase">Santé du Sol</p>
+<span class="material-symbols-outlined text-primary text-lg">ecg_heart</span>
+</div>
+<p class="text-4xl font-black text-slate-900 dark:text-white">88<span class="text-lg text-slate-400 font-medium">/100</span></p>
+<div class="mt-2 flex items-center gap-1 text-primary text-xs font-bold">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                    +2% depuis la semaine dernière
+                </div>
+</div>
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-[#234823] p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-bold uppercase">Azote (N)</p>
+<span class="material-symbols-outlined text-sky-400 text-lg">science</span>
+</div>
+<p class="text-4xl font-black text-slate-900 dark:text-white">42<span class="text-lg text-slate-400 font-medium"> ppm</span></p>
+<div class="mt-2 w-full bg-slate-100 dark:bg-[#234823] h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-[#234823] p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-bold uppercase">Phosphore (P)</p>
+<span class="material-symbols-outlined text-orange-400 text-lg">science</span>
+</div>
+<p class="text-4xl font-black text-slate-900 dark:text-white">18<span class="text-lg text-slate-400 font-medium"> ppm</span></p>
+<div class="mt-2 w-full bg-slate-100 dark:bg-[#234823] h-1.5 rounded-full overflow-hidden">
+<div class="bg-orange-400 h-full rounded-full" style="width: 40%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-[#234823] p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-bold uppercase">Potassium (K)</p>
+<span class="material-symbols-outlined text-purple-400 text-lg">science</span>
+</div>
+<p class="text-4xl font-black text-slate-900 dark:text-white">156<span class="text-lg text-slate-400 font-medium"> ppm</span></p>
+<div class="mt-2 w-full bg-slate-100 dark:bg-[#234823] h-1.5 rounded-full overflow-hidden">
+<div class="bg-purple-400 h-full rounded-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1">
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-[#234823] rounded-xl p-6 flex flex-col">
+<h3 class="text-slate-900 dark:text-white text-base font-bold mb-6">Niveaux NPK</h3>
+<div class="flex-1 flex items-center justify-center relative">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 dark:opacity-40">
+<div class="size-48 border border-slate-400 dark:border-[#326732] rounded-full flex items-center justify-center">
+<div class="size-32 border border-slate-400 dark:border-[#326732] rounded-full flex items-center justify-center">
+<div class="size-16 border border-slate-400 dark:border-[#326732] rounded-full"></div>
+</div>
+</div>
+<div class="absolute w-48 h-[1px] bg-slate-400 dark:bg-[#326732]"></div>
+<div class="absolute h-48 w-[1px] bg-slate-400 dark:bg-[#326732]"></div>
+</div>
+<svg class="w-full max-w-[240px] aspect-square transform -rotate-90 overflow-visible" viewBox="0 0 100 100">
+<polygon fill="rgba(19, 236, 19, 0.4)" points="50,10 85,35 75,80 25,80 15,35" stroke="#13ec13" stroke-width="2"></polygon>
+<circle cx="50" cy="10" fill="#13ec13" r="2"></circle>
+<circle cx="85" cy="35" fill="#13ec13" r="2"></circle>
+<circle cx="75" cy="80" fill="#13ec13" r="2"></circle>
+<circle cx="25" cy="80" fill="#13ec13" r="2"></circle>
+<circle cx="15" cy="35" fill="#13ec13" r="2"></circle>
+</svg>
+<div class="absolute top-0 text-[10px] font-bold text-slate-500 dark:text-[#92c992]">AZOTE (N)</div>
+<div class="absolute bottom-0 text-[10px] font-bold text-slate-500 dark:text-[#92c992]">PHOSPHORE (P)</div>
+<div class="absolute right-0 text-[10px] font-bold text-slate-500 dark:text-[#92c992]">POTASSIUM (K)</div>
+</div>
+<div class="mt-4 flex justify-around">
+<div class="text-center">
+<p class="text-[10px] text-slate-500 dark:text-[#92c992] uppercase font-bold">Équilibré</p>
+<p class="text-xs font-black dark:text-white">Macro</p>
+</div>
+<div class="text-center">
+<p class="text-[10px] text-slate-500 dark:text-[#92c992] uppercase font-bold">Traces</p>
+<p class="text-xs font-black dark:text-white">Micro</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-[#234823] rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-slate-900 dark:text-white text-base font-bold">Niveau de pH</h3>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold">OPTIMAL</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center">
+<div class="gauge-container flex justify-center mt-4">
+<div class="gauge-arc"></div>
+<div class="gauge-fill"></div>
+</div>
+<div class="text-center -mt-2">
+<p class="text-4xl font-black text-slate-900 dark:text-white">6.5</p>
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-medium">Légèrement Acide</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-[#234823] flex justify-between text-[10px] font-bold text-slate-400">
+<span>ACIDE (0)</span>
+<span>NEUTRE (7)</span>
+<span>ALCALIN (14)</span>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-[#234823] rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-slate-900 dark:text-white text-base font-bold">Tendances Climatiques</h3>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 text-[10px] text-slate-400"><div class="size-1.5 rounded-full bg-primary"></div> Pluie</span>
+<span class="flex items-center gap-1 text-[10px] text-slate-400"><div class="size-1.5 rounded-full bg-orange-400"></div> Temp</span>
+</div>
+</div>
+<div class="flex-1">
+<svg class="w-full h-24 overflow-visible" viewBox="0 0 400 100">
+<path d="M0 80 Q 50 20, 100 60 T 200 40 T 300 70 T 400 20 L 400 100 L 0 100 Z" fill="rgba(19, 236, 19, 0.1)"></path>
+<path d="M0 80 Q 50 20, 100 60 T 200 40 T 300 70 T 400 20" fill="none" stroke="#13ec13" stroke-width="2"></path>
+<path d="M0 40 L 80 45 L 160 30 L 240 55 L 320 35 L 400 50" fill="none" stroke="#fb923c" stroke-dasharray="4" stroke-width="2"></path>
+</svg>
+<div class="flex justify-between mt-4 text-[10px] font-bold text-slate-400">
+<span>MAR</span>
+<span>AVR</span>
+<span>MAI</span>
+<span>JUN</span>
+<span>JUL</span>
+<span>AOU</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div>
+<p class="text-[10px] text-slate-500 dark:text-[#92c992] uppercase font-bold">Temp. Moy.</p>
+<p class="text-sm font-black dark:text-white">22.5°C</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-slate-500 dark:text-[#92c992] uppercase font-bold">Pluie Totale</p>
+<p class="text-sm font-black dark:text-white">142mm</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-[#234823] rounded-xl overflow-hidden flex flex-col">
+<div class="p-4 border-b border-slate-100 dark:border-[#234823] flex items-center justify-between">
+<h3 class="text-slate-900 dark:text-white text-base font-bold">Historique des Actions Agricoles</h3>
+<button class="text-primary text-xs font-bold hover:underline">Voir tout</button>
+</div>
+<div class="flex flex-nowrap overflow-x-auto p-4 gap-4 custom-scrollbar pb-6">
+<div class="flex-shrink-0 w-64 bg-slate-50 dark:bg-[#1a331a] rounded-lg p-4 border border-slate-100 dark:border-[#326732]/30">
+<div class="flex justify-between items-start mb-3">
+<span class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Fertilisation</span>
+<span class="text-slate-400 text-[10px]">12 Oct. 2023</span>
+</div>
+<p class="text-sm font-bold text-slate-900 dark:text-white mb-1">Application NPK liquide 10-10-10</p>
+<p class="text-xs text-slate-500 dark:text-[#92c992]">Opérateur : R. Simmons • Dose : 45L/Ha</p>
+</div>
+<div class="flex-shrink-0 w-64 bg-slate-50 dark:bg-[#1a331a] rounded-lg p-4 border border-slate-100 dark:border-[#326732]/30">
+<div class="flex justify-between items-start mb-3">
+<span class="bg-sky-400/20 text-sky-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Irrigation</span>
+<span class="text-slate-400 text-[10px]">08 Oct. 2023</span>
+</div>
+<p class="text-sm font-bold text-slate-900 dark:text-white mb-1">Cycle profond Système 4</p>
+<p class="text-xs text-slate-500 dark:text-[#92c992]">Auto-planifié • 45 000 Litres</p>
+</div>
+<div class="flex-shrink-0 w-64 bg-slate-50 dark:bg-[#1a331a] rounded-lg p-4 border border-slate-100 dark:border-[#326732]/30">
+<div class="flex justify-between items-start mb-3">
+<span class="bg-orange-400/20 text-orange-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Préparation</span>
+<span class="text-slate-400 text-[10px]">30 Sep. 2023</span>
+</div>
+<p class="text-sm font-bold text-slate-900 dark:text-white mb-1">Aération Zone 2</p>
+<p class="text-xs text-slate-500 dark:text-[#92c992]">Labour profond • 30cm prof.</p>
+</div>
+<div class="flex-shrink-0 w-64 bg-slate-50 dark:bg-[#1a331a] rounded-lg p-4 border border-slate-100 dark:border-[#326732]/30">
+<div class="flex justify-between items-start mb-3">
+<span class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Semis</span>
+<span class="text-slate-400 text-[10px]">22 Sep. 2023</span>
+</div>
+<p class="text-sm font-bold text-slate-900 dark:text-white mb-1">Maïs Hybride P1197</p>
+<p class="text-xs text-slate-500 dark:text-[#92c992]">Semoir #04 • 80k plants/Ha</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

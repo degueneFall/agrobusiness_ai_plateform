@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rapports de Rentabilité et Rendements | AgriYield AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<header class="sticky top-0 z-50 w-full border-b border-white/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-10 py-3">
+<div class="max-w-[1600px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="p-1.5 bg-primary rounded-lg">
+<span class="material-symbols-outlined text-background-dark text-2xl font-bold">potted_plant</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">AgriYield <span class="text-primary">AI</span></h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Tableau de bord</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Cartographie</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Sélection de semences</a>
+<a class="text-sm font-medium text-primary border-b-2 border-primary pb-1" href="#">Rapports Financiers</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none w-64" placeholder="Rechercher des données..." type="text"/>
+</div>
+<button class="flex items-center gap-2 bg-primary text-background-dark px-4 py-2 rounded-lg text-sm font-bold hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-sm">file_download</span>
+<span>Exporter Rapport</span>
+</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary/30 p-0.5">
+<div class="h-full w-full rounded-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGEWeIuZsCaF8ygSDknwzMR7DVzTfejVJU_fax2Et8OZJ5iJfp48uU3iv1aoyWr4Si4CVSf_nG4l6ILSyeql9W0Lwv-wpKj8qyRa1DI-bEN5rL6VjOnKseUtLOp09XRazQVrCj5qTEX3lS8R_fYgP055_C1U6gRmL1yHjDbQNwKB8TBmQspCKpTr24Bs2dzlLDqU-Cq01qp8dHQPvEf0pqLvKPN8ItDmuWutRPpe6mAJVfrH11mGnHAlYsLertAnKwiQf6457yehw')"></div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1600px] mx-auto p-4 lg:p-8 flex flex-col lg:flex-row gap-8">
+<aside class="w-full lg:w-[320px] flex flex-col gap-6">
+<div class="bg-white/5 border border-white/10 rounded-xl p-6">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<h3 class="text-lg font-semibold">Outil de Simulation</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Superficie</label>
+<div class="relative">
+<input class="w-full bg-background-dark border border-white/10 rounded-lg py-2 px-3 text-sm focus:border-primary focus:ring-0" type="number" value="200"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">Hectares</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Coûts de Production (Semences)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">€</span>
+<input class="w-full bg-background-dark border border-white/10 rounded-lg py-2 pl-7 pr-3 text-sm focus:border-primary focus:ring-0" type="number" value="85.00"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">/ Sac</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Irrigation &amp; Eau</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">€</span>
+<input class="w-full bg-background-dark border border-white/10 rounded-lg py-2 pl-7 pr-3 text-sm focus:border-primary focus:ring-0" type="number" value="30.50"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">/ Ha</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Estimation Main d'œuvre</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">€</span>
+<input class="w-full bg-background-dark border border-white/10 rounded-lg py-2 pl-7 pr-3 text-sm focus:border-primary focus:ring-0" type="number" value="45000"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">Total</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Qualité d'Engrais</label>
+<select class="w-full bg-background-dark border border-white/10 rounded-lg py-2 px-3 text-sm focus:border-primary focus:ring-0">
+<option>Hautement azoté (Optimal)</option>
+<option>NPK Standard</option>
+<option>Complément Biologique</option>
+</select>
+</div>
+<div class="pt-4 border-t border-white/10">
+<button class="w-full flex items-center justify-center gap-2 bg-primary/20 hover:bg-primary text-primary hover:text-background-dark border border-primary/50 py-3 rounded-lg font-bold transition-all group">
+<span class="material-symbols-outlined text-sm group-hover:rotate-180 transition-transform">autorenew</span>
+                        Lancer la Simulation IA
+                    </button>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-xl p-5">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<h4 class="font-semibold text-sm">Recommandation IA</h4>
+</div>
+<p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Basé sur vos <span class="text-primary">niveaux d'azote du sol</span> (Zone 4), passer à la Variété X-200 pourrait augmenter le rendement de <span class="font-bold">4.2%</span>.
+            </p>
+<a class="text-xs font-bold text-primary underline" href="#">Appliquer l'optimisation</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col gap-6">
+<h1 class="text-2xl font-black text-white px-2">Rapports de Rentabilité et Rendements</h1>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-white/5 border border-white/10 rounded-xl p-6">
+<div class="flex justify-between items-start mb-2">
+<span class="text-sm text-slate-400 font-medium">Bénéfice Net Estimé</span>
+<span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-bold">+12.4%</span>
+</div>
+<p class="text-3xl font-black text-white">142 500 €</p>
+<p class="text-xs text-slate-500 mt-2">Prévisions pour le cycle actuel</p>
+</div>
+<div class="bg-white/5 border border-white/10 rounded-xl p-6">
+<div class="flex justify-between items-start mb-2">
+<span class="text-sm text-slate-400 font-medium">ROI Attendu</span>
+<span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-bold">+3.2%</span>
+</div>
+<p class="text-3xl font-black text-white">24.5%</p>
+<p class="text-xs text-slate-500 mt-2">Vs. 21.3% moyenne régionale</p>
+</div>
+<div class="bg-white/5 border border-white/10 rounded-xl p-6">
+<div class="flex justify-between items-start mb-2">
+<span class="text-sm text-slate-400 font-medium">Prévisions de Rendement</span>
+<span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-bold">+5.1%</span>
+</div>
+<p class="text-3xl font-black text-white">12,5 <span class="text-lg font-normal text-slate-400">t/ha</span></p>
+<p class="text-xs text-slate-500 mt-2">Basé sur la cartographie actuelle</p>
+</div>
+</div>
+<div class="bg-white/5 border border-white/10 rounded-xl p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-lg font-bold">Tendance des Prévisions ROI</h3>
+<p class="text-sm text-slate-400">Projection de maturité financière sur 6 mois</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-white/5 rounded text-xs hover:bg-white/10">3 Mois</button>
+<button class="px-3 py-1 bg-primary/20 text-primary border border-primary/30 rounded text-xs">6 Mois</button>
+<button class="px-3 py-1 bg-white/5 rounded text-xs hover:bg-white/10">Annuel</button>
+</div>
+</div>
+<div class="w-full h-64 relative mt-4">
+<div class="absolute inset-0 flex items-end justify-between px-4 pb-8">
+<div class="w-[8%] bg-white/5 h-[20%] rounded-t-sm relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-slate-800 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">24k€</div>
+</div>
+<div class="w-[8%] bg-white/5 h-[35%] rounded-t-sm relative group"></div>
+<div class="w-[8%] bg-white/5 h-[30%] rounded-t-sm relative group"></div>
+<div class="w-[8%] bg-primary/40 h-[55%] rounded-t-sm relative group border-t-2 border-primary">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-background-dark font-bold text-[10px] py-1 px-2 rounded">68k€</div>
+</div>
+<div class="w-[8%] bg-primary/40 h-[75%] rounded-t-sm relative group border-t-2 border-primary"></div>
+<div class="w-[8%] bg-primary h-[100%] rounded-t-sm relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-background-dark font-bold text-[10px] py-1 px-2 rounded">142k€</div>
+</div>
+<div class="w-[8%] bg-primary/20 h-[85%] rounded-t-sm relative group"></div>
+<div class="w-[8%] bg-primary/10 h-[70%] rounded-t-sm relative group"></div>
+<div class="w-[8%] bg-white/5 h-[50%] rounded-t-sm relative group"></div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 flex justify-between px-2 pt-2 border-t border-white/10">
+<span class="text-[10px] text-slate-500 uppercase">Avr</span>
+<span class="text-[10px] text-slate-500 uppercase">Mai</span>
+<span class="text-[10px] text-slate-500 uppercase">Juin</span>
+<span class="text-[10px] text-primary uppercase font-bold">Juil</span>
+<span class="text-[10px] text-slate-500 uppercase">Août</span>
+<span class="text-[10px] text-slate-500 uppercase">Sept</span>
+<span class="text-[10px] text-slate-500 uppercase">Oct</span>
+<span class="text-[10px] text-slate-500 uppercase">Nov</span>
+<span class="text-[10px] text-slate-500 uppercase">Déc</span>
+</div>
+</div>
+</div>
+<div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+<div class="p-6 border-b border-white/10 flex items-center justify-between">
+<h3 class="text-lg font-bold">Comparaison de Rentabilité par Variété de Semences</h3>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-400">Trié par Rentabilité</span>
+<span class="material-symbols-outlined text-sm text-slate-400">filter_list</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-white/5 text-slate-400 uppercase text-[10px] font-bold tracking-widest">
+<th class="px-6 py-4">Nom de la Variété</th>
+<th class="px-6 py-4">Coût/Sac</th>
+<th class="px-6 py-4">Résistance Sécheresse</th>
+<th class="px-6 py-4">Prévisions de Rendement</th>
+<th class="px-6 py-4">Marge Estimée</th>
+<th class="px-6 py-4 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-semibold text-white">Maïs Hybride X-200</td>
+<td class="px-6 py-4 text-slate-300">85,00 €</td>
+<td class="px-6 py-4">
+<div class="flex gap-1">
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-white/20"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-300">12,8 t/ha</td>
+<td class="px-6 py-4 font-bold text-primary">+32 400 €</td>
+<td class="px-6 py-4 text-right">
+<button class="text-xs font-bold text-primary hover:underline uppercase">Sélectionner</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-semibold text-white">Soja Evergreen G3</td>
+<td class="px-6 py-4 text-slate-300">72,00 €</td>
+<td class="px-6 py-4">
+<div class="flex gap-1">
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-white/20"></div>
+<div class="h-1.5 w-4 rounded bg-white/20"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-300">4,2 t/ha</td>
+<td class="px-6 py-4 font-bold text-primary">+28 150 €</td>
+<td class="px-6 py-4 text-right">
+<button class="text-xs font-bold text-primary hover:underline uppercase">Sélectionner</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-semibold text-white">Blé Rustique Nord</td>
+<td class="px-6 py-4 text-slate-300">55,00 €</td>
+<td class="px-6 py-4">
+<div class="flex gap-1">
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+<div class="h-1.5 w-4 rounded bg-primary"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-300">8,5 t/ha</td>
+<td class="px-6 py-4 font-bold text-slate-400">+18 900 €</td>
+<td class="px-6 py-4 text-right">
+<button class="text-xs font-bold text-primary hover:underline uppercase">Sélectionner</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 text-slate-500 text-xs">
+<p>Dernière mise à jour : <span class="font-medium text-slate-300">Aujourd'hui, 09:42</span></p>
+<div class="flex items-center gap-4">
+<a class="hover:text-primary transition-colors" href="#">Logs de Simulation</a>
+<a class="hover:text-primary transition-colors" href="#">Modèle Historique v4.2</a>
+<span class="flex items-center gap-1 text-emerald-500"><span class="material-symbols-outlined text-[10px]">check_circle</span> Systèmes Opérationnels</span>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

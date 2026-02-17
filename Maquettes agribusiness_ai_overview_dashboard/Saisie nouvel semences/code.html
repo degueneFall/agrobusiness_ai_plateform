@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saisie de Nouvelles Semences - AgroAI Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#14b814",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#112111",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-size: 24px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0e1b0e] dark:text-white transition-colors duration-200">
+<!-- Main Container -->
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white dark:bg-[#1a2e1a] px-6 lg:px-40 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-[#0e1b0e] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">AgroAI Pro</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-primary flex border-none bg-primary/10 items-center justify-center pl-4 rounded-l-lg" data-icon="search">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1b0e] dark:text-white focus:outline-0 focus:ring-0 border-none bg-primary/10 focus:border-none h-full placeholder:text-primary/70 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Rechercher..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden lg:flex items-center gap-9">
+<a class="text-[#0e1b0e] dark:text-white text-sm font-medium leading-normal hover:text-primary" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold leading-normal" href="#">Catalogue</a>
+<a class="text-[#0e1b0e] dark:text-white text-sm font-medium leading-normal hover:text-primary" href="#">Cartographie</a>
+<a class="text-[#0e1b0e] dark:text-white text-sm font-medium leading-normal hover:text-primary" href="#">Analyses</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Mon Compte</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="Photo de profil utilisateur agricole" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCAK8jC2pdMxG2TyozCT1EofMJ4f94yBFlu_bj-MIMPA75iwy8ynMhmKU7rJ_6fzlfQLR5rqDnth7fPJkSi-ZQDLq4GCAyS4DyrtTGMsXlBmyZfapT9wNIEUiF-rO7Dwm7fKEAA-xNlDSwp-vVScwZlTV8DFHoP3PcLIBsuXG3yQeoCwM2hrIRKx021EMlTV4hKyJtAOfbAK7BL3S8skddHGbovw6ayHiQ9urc-ZrjndHvrFIFZC_TpAS-adCE5pUysBXv4shlI0gY");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex justify-center py-8 px-6 lg:px-40">
+<div class="layout-content-container flex flex-col max-w-[1000px] flex-1">
+<!-- Breadcrumbs & Title -->
+<div class="flex flex-col gap-2 mb-8">
+<nav class="flex items-center gap-2 text-primary/70 text-sm font-medium">
+<a class="hover:text-primary" href="#">Catalogue</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-[#0e1b0e] dark:text-white">Ajout de Semence</span>
+</nav>
+<h1 class="text-[#0e1b0e] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Saisie de Nouvelles Semences</h1>
+<p class="text-primary/80 text-lg">Intégrez de nouvelles variétés à l'intelligence artificielle pour des recommandations précises.</p>
+</div>
+<!-- Form Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left: Main Form Fields -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Card: Informations Générales -->
+<div class="bg-white dark:bg-[#1a2e1a] rounded-xl p-6 border border-primary/10 shadow-sm">
+<div class="flex items-center gap-2 mb-6 text-primary">
+<span class="material-symbols-outlined">info</span>
+<h2 class="text-xl font-bold dark:text-white text-[#0e1b0e]">Informations Générales</h2>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold mb-2 text-[#0e1b0e] dark:text-white">Nom de la semence *</label>
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-12 px-4" placeholder="Ex: Maïs Hybride XL-200" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-semibold mb-2 text-[#0e1b0e] dark:text-white">Type de culture</label>
+<select class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-12 px-4">
+<option>Céréales</option>
+<option>Légumineuses</option>
+<option>Oléagineux</option>
+<option>Maraîchage</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-2 text-[#0e1b0e] dark:text-white">Fournisseur</label>
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-12 px-4" placeholder="Ex: AgroSeed Corp" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-2 text-[#0e1b0e] dark:text-white">Rendement moyen attendu</label>
+<div class="relative">
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-12 px-4" placeholder="0.0" type="number"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-primary/60 font-medium">
+                                                Tonnes / Hectare
+                                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card: Exigences Environnementales -->
+<div class="bg-white dark:bg-[#1a2e1a] rounded-xl p-6 border border-primary/10 shadow-sm">
+<div class="flex items-center gap-2 mb-6 text-primary">
+<span class="material-symbols-outlined">eco</span>
+<h2 class="text-xl font-bold dark:text-white text-[#0e1b0e]">Exigences Environnementales</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- pH Section -->
+<div class="space-y-3">
+<p class="text-sm font-bold text-primary flex items-center gap-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">science</span> pH du Sol
+                                        </p>
+<div class="flex items-center gap-3">
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-10 px-3 text-center" placeholder="Min (ex: 5.5)" type="text"/>
+<span class="text-primary/40 font-bold">—</span>
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-10 px-3 text-center" placeholder="Max (ex: 7.0)" type="text"/>
+</div>
+</div>
+<!-- Rainfall Section -->
+<div class="space-y-3">
+<p class="text-sm font-bold text-primary flex items-center gap-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">water_drop</span> Précipitations (mm/an)
+                                        </p>
+<div class="flex items-center gap-3">
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-10 px-3 text-center" placeholder="Min" type="number"/>
+<span class="text-primary/40 font-bold">—</span>
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-10 px-3 text-center" placeholder="Max" type="number"/>
+</div>
+</div>
+<!-- Temperature Section -->
+<div class="space-y-3">
+<p class="text-sm font-bold text-primary flex items-center gap-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">thermostat</span> Température Optimale (°C)
+                                        </p>
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-10 px-4" placeholder="Ex: 24" type="number"/>
+</div>
+<!-- Duration Section -->
+<div class="space-y-3">
+<p class="text-sm font-bold text-primary flex items-center gap-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">event</span> Cycle de Croissance
+                                        </p>
+<div class="relative">
+<input class="w-full rounded-lg border-primary/20 bg-primary/5 dark:bg-background-dark focus:ring-primary focus:border-primary h-10 px-4" placeholder="Ex: 120" type="number"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-primary/60 text-xs font-bold">JOURS</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Media & Validation -->
+<div class="space-y-6">
+<!-- Card: Photo -->
+<div class="bg-white dark:bg-[#1a2e1a] rounded-xl p-6 border border-primary/10 shadow-sm">
+<h3 class="text-lg font-bold mb-4 dark:text-white text-[#0e1b0e]">Photo de la variété</h3>
+<div class="border-2 border-dashed border-primary/20 rounded-xl bg-primary/5 p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary/40 transition-colors">
+<div class="bg-primary/20 p-4 rounded-full text-primary mb-4">
+<span class="material-symbols-outlined text-3xl">add_a_photo</span>
+</div>
+<p class="text-sm font-semibold text-[#0e1b0e] dark:text-white">Cliquez pour télécharger</p>
+<p class="text-xs text-primary/60 mt-1">PNG, JPG jusqu'à 10MB</p>
+</div>
+<div class="mt-4 p-4 rounded-lg bg-primary/10 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<p class="text-[10px] leading-tight text-primary/80 italic font-medium">L'IA analysera l'image pour détecter d'éventuels traits visuels caractéristiques.</p>
+</div>
+</div>
+<!-- Final Actions -->
+<div class="space-y-3">
+<button class="w-full flex items-center justify-center gap-2 rounded-xl bg-primary text-white py-4 font-bold text-lg hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all active:scale-95">
+<span class="material-symbols-outlined">save</span>
+                                    Enregistrer la semence
+                                </button>
+<button class="w-full py-4 text-primary font-bold hover:bg-primary/5 rounded-xl transition-colors border border-transparent hover:border-primary/20">
+                                    Annuler
+                                </button>
+</div>
+<!-- AI Status / Summary -->
+<div class="p-4 bg-background-light dark:bg-[#0e1b0e]/50 rounded-xl border border-primary/10">
+<p class="text-xs font-bold text-primary/70 uppercase tracking-widest mb-3">IA Recommandation Readiness</p>
+<div class="flex items-center gap-2 mb-2">
+<div class="flex-1 h-2 bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%]"></div>
+</div>
+<span class="text-xs font-bold text-primary">65%</span>
+</div>
+<p class="text-[11px] text-primary/60 leading-normal">
+                                    Remplissez les précisions de pH et de pluie pour atteindre 100% de précision dans les analyses de sol.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Small -->
+<footer class="px-6 lg:px-40 py-10 border-t border-primary/10 text-center">
+<p class="text-primary/50 text-xs font-medium uppercase tracking-widest">AgroAI Pro System © 2024 - Intelligence au service de la terre</p>
+</footer>
+</div>
+</div>
+</body></html>

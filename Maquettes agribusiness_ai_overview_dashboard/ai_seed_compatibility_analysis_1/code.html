@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analyse de Compatibilité des Semences</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234823;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#234823] px-6 py-3 bg-white dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<span class="material-symbols-outlined text-3xl">agriculture</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">AgriAI Analyse</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Cartographie</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Catalogue Semences</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Rapports Sols</a>
+<a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary" href="#">Analyses IA</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden lg:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-400 dark:text-[#92c992] flex border-none bg-slate-100 dark:bg-[#234823] items-center justify-center pl-4 rounded-l-lg" data-icon="search">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-slate-100 dark:bg-[#234823] focus:ring-0 placeholder:text-slate-400 dark:placeholder:text-[#92c992] text-sm px-4 rounded-r-lg" placeholder="Rechercher parcelles ou semences"/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#234823] text-slate-600 dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#234823] text-slate-600 dark:text-white relative hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full"></span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/30" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCsg8PtOwoGbqz40pUjuAxiZhqDEuG0FGZboAHJGZIustPSwtkUUIKPaHjIVFw86iCy5y6OjCtzHL3xdgCV5pYLv-Bad85p1ODkxbUofzrpEYN8nkTMIy02ciGq955Gl-CfjReQhOBP2nb2xBaEFePAAyypIUs0wXptQoRKVq-jAnHHsFDiqg4M7srHXRxWjHC9BCyPpfU8qUwYQV0HF_rTFY3jyoAaC1XLJxRTXcbz3NRRBgJjplENLqNci96TXkaB_K-l-VSG5mA");'></div>
+</div>
+</header>
+<main class="flex-1 px-4 lg:px-10 py-6 max-w-[1440px] mx-auto w-full">
+<div class="flex flex-col gap-4 mb-8">
+<div class="flex items-center gap-2 text-slate-500 dark:text-[#92c992] text-xs font-medium uppercase tracking-wider">
+<a class="hover:text-primary transition-colors" href="#">Accueil</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Bibliothèque</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-bold">Analyse de Compatibilité</span>
+</div>
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="space-y-1">
+<h1 class="text-slate-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">Analyse de Compatibilité des Semences</h1>
+<p class="text-slate-600 dark:text-[#92c992] text-base">Maïs Hybride ZX-4 vs. <span class="text-primary font-semibold underline">Parcelle B-12</span></p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-11 px-5 border border-slate-300 dark:border-[#326732] bg-white dark:bg-transparent text-slate-700 dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-primary/10 transition-all">
+<span class="material-symbols-outlined mr-2">download</span>
+                            Exporter PDF
+                        </button>
+<button class="flex items-center justify-center rounded-lg h-11 px-6 bg-primary text-background-dark text-sm font-bold hover:brightness-110 transition-all shadow-[0_0_20px_rgba(19,236,19,0.3)]">
+<span class="material-symbols-outlined mr-2">play_arrow</span>
+                            Lancer Simulation
+                        </button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border border-slate-200 dark:border-[#326732] shadow-sm">
+<div class="flex justify-between items-center">
+<p class="text-slate-500 dark:text-[#92c992] text-sm font-bold uppercase tracking-tight">Probabilité de Réussite</p>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-4xl font-black">88%</p>
+<p class="text-primary text-sm font-bold leading-normal">+5.2% vs moy.</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border border-slate-200 dark:border-[#326732] shadow-sm">
+<div class="flex justify-between items-center">
+<p class="text-slate-500 dark:text-[#92c992] text-sm font-bold uppercase tracking-tight">Niveau de Confiance</p>
+<span class="material-symbols-outlined text-blue-500">verified_user</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-4xl font-black">Élevé</p>
+<p class="text-slate-400 dark:text-slate-500 text-sm font-medium">92% Données couvertes</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border border-slate-200 dark:border-[#326732] shadow-sm">
+<div class="flex justify-between items-center">
+<p class="text-slate-500 dark:text-[#92c992] text-sm font-bold uppercase tracking-tight">Indice de Risque</p>
+<span class="material-symbols-outlined text-orange-500">warning</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-4xl font-black">Faible</p>
+<p class="text-primary text-sm font-bold">Risque de gel minime</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10">
+<div class="lg:col-span-4 flex flex-col gap-4">
+<div class="bg-white dark:bg-[#152a15] rounded-xl p-6 border border-slate-200 dark:border-[#234823]">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">potted_plant</span>
+                            Exigences des Semences
+                        </h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-medium text-slate-500 dark:text-[#92c992]">Besoins en eau optimaux</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">650 mm / saison</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-background-dark rounded-full h-2">
+<div class="bg-blue-500 h-2 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-medium text-slate-500 dark:text-[#92c992]">Type de sol</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">Loameux / Sableux</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-background-dark rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-medium text-slate-500 dark:text-[#92c992]">Tolérance pH</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">5.8 - 7.2</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-background-dark rounded-full h-2 overflow-hidden flex">
+<div class="h-full bg-slate-300 dark:bg-slate-700" style="width: 40%"></div>
+<div class="h-full bg-primary/60" style="width: 30%"></div>
+<div class="h-full bg-slate-300 dark:bg-slate-700" style="width: 30%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-200 dark:border-[#234823]">
+<h4 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase mb-3 tracking-widest">Facteurs de Résilience</h4>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex items-center gap-2 bg-slate-50 dark:bg-background-dark p-2 rounded-lg border border-slate-100 dark:border-[#234823]">
+<span class="material-symbols-outlined text-orange-400 text-lg">wb_sunny</span>
+<span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Résistance Sécheresse</span>
+</div>
+<div class="flex items-center gap-2 bg-slate-50 dark:bg-background-dark p-2 rounded-lg border border-slate-100 dark:border-[#234823]">
+<span class="material-symbols-outlined text-teal-400 text-lg">bug_report</span>
+<span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Immunité Ravageurs</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col items-center justify-center p-8 bg-white/50 dark:bg-[#1c3a1c]/20 rounded-2xl border border-dashed border-slate-300 dark:border-[#326732] relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent"></div>
+<div class="relative z-10 text-center">
+<p class="text-slate-500 dark:text-[#92c992] text-sm font-bold mb-6">SCORE DE RÉUSSITE IA</p>
+<div class="relative size-64 mx-auto mb-6 flex items-center justify-center">
+<svg class="size-full transform -rotate-90">
+<circle class="text-slate-200 dark:text-[#234823]" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-width="20"></circle>
+<circle class="drop-shadow-[0_0_12px_rgba(19,236,19,0.8)]" cx="128" cy="128" fill="transparent" r="110" stroke="#13ec13" stroke-dasharray="691" stroke-dashoffset="83" stroke-linecap="round" stroke-width="20"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-6xl font-black text-slate-900 dark:text-white">88<span class="text-3xl text-primary">%</span></span>
+<span class="text-primary text-xs font-bold bg-primary/10 px-3 py-1 rounded-full mt-2">CORRESPONDANCE OPTIMALE</span>
+</div>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm max-w-[240px] leading-relaxed italic">
+                            "Les conditions de la Parcelle B-12 sont alignées à 94% avec les besoins de la ZX-4."
+                        </p>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-4">
+<div class="bg-white dark:bg-[#152a15] rounded-xl p-6 border border-slate-200 dark:border-[#234823] flex-1">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sensors</span>
+                                Données Terrain
+                            </h3>
+<span class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded-full animate-pulse font-bold tracking-tighter uppercase">Direct</span>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-slate-50 dark:bg-background-dark rounded-lg border border-slate-100 dark:border-[#234823]">
+<div class="flex justify-between mb-1">
+<span class="text-xs font-bold text-slate-500 dark:text-[#92c992] uppercase">Humidité du sol</span>
+<span class="text-xs font-bold text-primary">Idéal</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-black text-slate-900 dark:text-white">42.8%</span>
+<div class="flex gap-1 h-8 items-end">
+<div class="w-1.5 h-3 bg-primary/30 rounded-t-sm"></div>
+<div class="w-1.5 h-5 bg-primary/30 rounded-t-sm"></div>
+<div class="w-1.5 h-8 bg-primary rounded-t-sm"></div>
+<div class="w-1.5 h-6 bg-primary rounded-t-sm"></div>
+<div class="w-1.5 h-7 bg-primary rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-background-dark rounded-lg border border-slate-100 dark:border-[#234823]">
+<div class="flex justify-between mb-1">
+<span class="text-xs font-bold text-slate-500 dark:text-[#92c992] uppercase">Azote (N)</span>
+<span class="text-xs font-bold text-orange-400">Ajouter 12kg/ha</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-black text-slate-900 dark:text-white">168 <span class="text-sm font-normal text-slate-400">mg/kg</span></span>
+<span class="material-symbols-outlined text-orange-400">arrow_downward</span>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-background-dark rounded-lg border border-slate-100 dark:border-[#234823]">
+<div class="flex justify-between mb-1">
+<span class="text-xs font-bold text-slate-500 dark:text-[#92c992] uppercase">Temp. Surface</span>
+<span class="text-xs font-bold text-slate-400">Stable</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-black text-slate-900 dark:text-white">22.4°C</span>
+<span class="material-symbols-outlined text-blue-400">thermometer</span>
+</div>
+</div>
+</div>
+<div class="mt-4 p-3 rounded-lg bg-primary/10 border border-primary/20 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">info</span>
+<p class="text-[11px] text-slate-700 dark:text-slate-300 leading-tight">
+                                Flotte de capteurs <b>SF-92</b> active sur le secteur Ouest. Dernier signal il y a 2 min.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#152a15] rounded-xl border border-slate-200 dark:border-[#234823] overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-[#234823] flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark text-xl">psychology</span>
+</div>
+<h3 class="text-slate-900 dark:text-white text-lg font-bold">Recommandations Détaillées de l'IA</h3>
+</div>
+<button class="text-primary text-sm font-bold hover:underline flex items-center gap-1">
+                        Tout voir <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-[#234823]">
+<div class="p-6">
+<h4 class="text-primary text-sm font-bold mb-3 uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">water_drop</span>
+                            Plan d'Irrigation
+                        </h4>
+<p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            L'humidité actuelle est légèrement supérieure à l'optimale. Retarder le premier cycle d'irrigation de <span class="font-bold text-white">48 heures</span>.
+                        </p>
+</div>
+<div class="p-6">
+<h4 class="text-orange-400 text-sm font-bold mb-3 uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">science</span>
+                            Gestion des Nutriments
+                        </h4>
+<p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            Faible taux d'azote détecté. La ZX-4 nécessite un apport au <span class="font-bold text-white">stade de croissance V3</span> (prévu mi-juin).
+                        </p>
+</div>
+<div class="p-6">
+<h4 class="text-blue-400 text-sm font-bold mb-3 uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+                            Fenêtre de Semis
+                        </h4>
+<p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            Les modèles historiques suggèrent un <span class="font-bold text-white">succès de 92%</span> si planté sous 5 jours. Pluies attendues le 28 mai.
+                        </p>
+</div>
+</div>
+</div>
+<div class="mt-10 mb-20 rounded-2xl overflow-hidden h-64 relative border border-slate-200 dark:border-[#326732] group shadow-xl">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4LsTZJyAtVdB8YHlzXsq6_gWWIJqS0UCbh9esq-Wqkhgq1H0wJCPg6eiPoR0Pd_DHSK9XfGe1B2VxCyoNBbDpIdosJjyCesWosc-St9fRhSDw1igAwNRsFHxx1l_X0-sd_JKKSoAap1nS-AvYBQ81RjWS1DJOhQxEVqeNjqteaNzMWAKtWVR4xxW-oOaXQs5l-POZPYPA_2FFIiqWj8WlD0ZACPXt4XZTuCQfbiniWP8N3mZAkWbzLYBu0HpzdS6NNwD-bO1RhfM");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<div class="bg-background-dark/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-primary/30 flex items-center gap-2">
+<div class="size-2 bg-primary rounded-full animate-pulse"></div>
+<span class="text-[10px] font-bold text-white uppercase tracking-widest">Scan Actif Parcelle B-12</span>
+</div>
+</div>
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<div>
+<h4 class="text-white text-xl font-bold">Vue Spatiale du Terrain</h4>
+<p class="text-slate-300 text-xs">Carte thermique : densité d'humidité sur 45.2 hectares</p>
+</div>
+<button class="bg-white text-background-dark font-bold text-sm px-6 py-3 rounded-full hover:bg-primary transition-all flex items-center gap-2 shadow-lg">
+<span class="material-symbols-outlined text-lg">map</span>
+                        Ouvrir la Carte Interactive
+                    </button>
+</div>
+</div>
+</main>
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-max max-w-[95vw]">
+<div class="bg-background-dark/90 backdrop-blur-xl border border-white/10 p-2 rounded-full shadow-2xl flex items-center gap-2">
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-background-dark font-bold text-sm hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-lg">shopping_cart</span>
+                    Commander
+                </button>
+<div class="h-6 w-px bg-white/10 mx-1"></div>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full hover:bg-white/10 text-white font-bold text-sm transition-all">
+<span class="material-symbols-outlined text-lg">edit</span>
+                    Modifier Parcelle
+                </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full hover:bg-white/10 text-white font-bold text-sm transition-all">
+<span class="material-symbols-outlined text-lg">compare_arrows</span>
+                    Changer Semence
+                </button>
+<button class="size-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

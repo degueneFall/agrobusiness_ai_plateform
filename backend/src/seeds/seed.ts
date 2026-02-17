@@ -6,6 +6,9 @@ import { User, UserRole } from '../modules/users/entities/user.entity';
 import { Region } from '../modules/system-admin/entities/region.entity';
 import { Seed, CropType, WaterRequirement } from '../modules/seeds/entities/seed.entity';
 import { AiModel, AiModelType } from '../modules/ai-admin/entities/ai-model.entity';
+import { Plot, SoilType } from '../modules/plots/entities/plot.entity';
+import { Notification, NotificationType, NotificationPriority } from '../modules/notifications/entities/notification.entity';
+import { AiRecommendation, RecommendationType } from '../modules/ai-compatibility/entities/ai-recommendation.entity';
 
 async function bootstrap() {
     const app = await NestFactory.createApplicationContext(AppModule);
@@ -31,14 +34,13 @@ async function bootstrap() {
         }
     }
 
-    // 2. Admin User
+    // 2. Admin & Agronomist Users
     const userRepo = dataSource.getRepository(User);
     const adminEmail = 'admin@agriai.sn';
-    const adminExists = await userRepo.findOneBy({ email: adminEmail });
-
-    if (!adminExists) {
+    let adminUser = await userRepo.findOneBy({ email: adminEmail });
+    if (!adminUser) {
         const passwordHash = await bcrypt.hash('Admin@123', 10);
-        const adminUser = userRepo.create({
+        adminUser = userRepo.create({
             email: adminEmail,
             passwordHash,
             firstName: 'Admin',
@@ -50,8 +52,88 @@ async function bootstrap() {
         console.log('Admin user created');
     }
 
-    // 3. Seeds
+    const agronomeEmail = 'agronome@agriai.sn';
+    let agronomeUser = await userRepo.findOneBy({ email: agronomeEmail });
+    if (!agronomeUser) {
+        const passwordHash = await bcrypt.hash('Agronome@123', 10);
+        agronomeUser = userRepo.create({
+            email: agronomeEmail,
+            passwordHash,
+            firstName: 'Agronome',
+            lastName: 'Demo',
+            role: UserRole.AGRONOMIST,
+            isVerified: true,
+        });
+        await userRepo.save(agronomeUser);
+        console.log('Agronomist user created');
+    }
+
+    const adminId = adminUser.id;
+    const dakar = await regionRepo.findOneBy({ code: 'DK' });
+    const thies = await regionRepo.findOneBy({ code: 'TH' });
+
+    // Plots for admin
+    const plotRepo = dataSource.getRepository(Plot);
+    const plotCount = await plotRepo.count({ where: { userId: adminId } });
+    if (plotCount === 0 && dakar && thies) {
+        const plotsData = [
+            { name: 'Parcelle A-102 (Maïs)', areaHectares: 15.4, regionId: dakar.id, soilType: SoilType.LOAMY, soilPh: 6.8, ndviScore: 0.82 },
+            { name: 'Vignoble Nord B-205', areaHectares: 8.2, regionId: thies.id, soilType: SoilType.LOAMY, soilPh: 6.2, ndviScore: 0.45 },
+            { name: 'Verger Sud C-301', areaHectares: 22.1, regionId: dakar.id, soilType: SoilType.LOAMY, soilPh: 6.9, ndviScore: 0.68 },
+        ];
+        for (const p of plotsData) {
+            await plotRepo.save(plotRepo.create({ ...p, userId: adminId }));
+        }
+        console.log('Plots created');
+    }
+
     const seedRepo = dataSource.getRepository(Seed);
+
+    // Notifications for admin
+    const notifRepo = dataSource.getRepository(Notification);
+    const notifCount = await notifRepo.count({ where: { userId: adminId } });
+    if (notifCount === 0) {
+        const notifs = [
+            { type: NotificationType.IRRIGATION, title: 'Alerte Irrigation : Champ 42', message: "L'analyse IA indique une chute critique d'humidité en Zone C. Automatisation activée (Secteur 4-8).", priority: NotificationPriority.HIGH },
+            { type: NotificationType.ALERT, title: 'Anomalie de Ravageurs Détectée', message: 'La reconnaissance par drone identifie un risque de grappes de pucerons dans les parcelles de blé Nord-Est.', priority: NotificationPriority.MEDIUM },
+            { type: NotificationType.RECOMMENDATION, title: 'Sync. Santé des Sols Quotidienne', message: 'Ingestion des données satellites terminée. Moyenne NDVI stable à 0.72 (+0.01 vs hier).', priority: NotificationPriority.LOW },
+        ];
+        for (const n of notifs) {
+            await notifRepo.save(notifRepo.create({ ...n, userId: adminId }));
+        }
+        console.log('Notifications created');
+    }
+
+    // AI Recommendations (plot + seed)
+    const recRepo = dataSource.getRepository(AiRecommendation);
+    const recCount = await recRepo.count();
+    if (recCount === 0) {
+        const plots = await plotRepo.find({ where: { userId: adminId }, take: 3 });
+        const seeds = await seedRepo.find({ take: 4 });
+        if (plots.length && seeds.length) {
+            await recRepo.save(recRepo.create({
+                plotId: plots[0].id,
+                seedId: seeds[0].id,
+                compatibilityScore: 88,
+                recommendationType: RecommendationType.OPTIMAL,
+                expectedYield: 14.2,
+                confidenceLevel: 0.88,
+                modelVersion: 'v2.4',
+            }));
+            await recRepo.save(recRepo.create({
+                plotId: plots[0].id,
+                seedId: seeds[1].id,
+                compatibilityScore: 72,
+                recommendationType: RecommendationType.SUITABLE,
+                expectedYield: 9.5,
+                confidenceLevel: 0.85,
+                modelVersion: 'v2.4',
+            }));
+            console.log('AI Recommendations created');
+        }
+    }
+
+    // 3. Seeds
     const seedsData = [
         {
             name: 'Z-45 Ultra Power',

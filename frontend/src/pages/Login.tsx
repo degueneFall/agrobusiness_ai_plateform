@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, Eye, EyeOff, TreeDeciduous } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { getApiErrorMessage } from '../services/api';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -17,8 +18,8 @@ const Login: React.FC = () => {
         try {
             await login({ email, password });
             navigate('/dashboard');
-        } catch (err) {
-            setError('Identifiants incorrects. Veuillez réessayer.');
+        } catch (err: any) {
+            setError(getApiErrorMessage(err, 'Identifiants incorrects. Veuillez réessayer.'));
         }
     };
 
@@ -131,6 +132,13 @@ const Login: React.FC = () => {
                             Se connecter
                         </button>
                     </div>
+
+                    <p className="text-center text-sm text-gray-600 mt-4">
+                        Pas encore de compte ?{' '}
+                        <Link to="/register" className="font-medium text-primary hover:text-green-700">
+                            S&apos;inscrire
+                        </Link>
+                    </p>
 
                     <div className="mt-6">
                         <div className="relative">

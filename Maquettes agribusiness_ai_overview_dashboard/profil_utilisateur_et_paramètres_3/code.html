@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profil Utilisateur et Paramètres - AgroIA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#14b814",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#112111",
+                        "forest-green": "#0e1b0e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-forest-green dark:text-gray-100 font-display min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark px-6 md:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-forest-green dark:text-white text-xl font-bold leading-tight tracking-tight">AgroIA</h2>
+</div>
+<nav class="hidden lg:flex items-center gap-8 ml-4">
+<a class="text-forest-green dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Tableau de bord</a>
+<a class="text-forest-green dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Cartographie</a>
+<a class="text-forest-green dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Analyses</a>
+<a class="text-forest-green dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Communauté</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-1.5 gap-2 border border-transparent focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-gray-500 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-gray-500" placeholder="Rechercher une parcelle..." type="text"/>
+</div>
+<button class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-forest-green dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center overflow-hidden">
+<img alt="Portrait de Jean Dupont" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChrQ961_n0__o8B3dG65HF2pfDet1Gr5XxOXCA55N0ppIYDRQDDRm4yn7iQgEOcpSaoSsHqfPISYLBR1X_Beqibwv80mRfe9ok8YsKrmg44Ad1ClPzK44-0Ov4ywBDqBAkUQ6Qcye6iP-aut5ZkmM167MRTXkYcUMwaIFpvr3t4B06dj_zUqJBOOUdxxExmUONjGbK4ZT-c579azFbMo6qtMLnMqD1vVzu9-ZgIMo_c2p2l4RUiJ5IKPanUL-iQpZDy84iEqHz26Q"/>
+</div>
+</div>
+</header>
+<main class="flex-1 px-4 md:px-10 py-8 max-w-[1200px] mx-auto w-full">
+<div class="mb-8">
+<h1 class="text-3xl font-black text-forest-green dark:text-white tracking-tight">Profil et Paramètres</h1>
+<p class="text-gray-600 dark:text-gray-400 mt-1">Gérez vos informations personnelles et configurez vos préférences de recommandation IA.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<aside class="lg:col-span-3">
+<div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-2 shadow-sm sticky top-24">
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-semibold" href="#personal-info">
+<span class="material-symbols-outlined">person</span>
+<span>Informations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#professional-prefs">
+<span class="material-symbols-outlined">work</span>
+<span>Professionnel</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#security">
+<span class="material-symbols-outlined">lock</span>
+<span>Sécurité</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#notifications">
+<span class="material-symbols-outlined">notifications_active</span>
+<span>Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#subscription">
+<span class="material-symbols-outlined">payments</span>
+<span>Abonnement</span>
+</a>
+</nav>
+<hr class="my-4 border-gray-100 dark:border-gray-800"/>
+<button class="w-full flex items-center justify-between px-4 py-3 text-red-600 font-medium hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg transition-colors">
+<span>Déconnexion</span>
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</aside>
+<div class="lg:col-span-9 space-y-6">
+<div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
+<div class="flex flex-col md:flex-row items-center gap-6">
+<div class="relative group">
+<div class="size-32 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-md">
+<img alt="Photo de profil" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSs07c7grRLdryPFpKYnbExYRNmxkXSvBTzxafqj2O3cnExMRd6btQIpEDuxsmcrm5JExSSVPF4B8tr3ZDqgdCsybF6lPNRJ6TlhT1JcbBbcVyi6yahKUT4-TFZrAvhaxilsYGk8H3m39UNkSv297AjpypyR5TKxZbvyEp5mdNZ3dzfMo8sjoYkUSIjCBrvAJ9-vDHo7SYRhtrYUQJZ16bS0TvH9uBPEZ3GiBUy7yrmfQkLtH9TBT7z4STFZ2kOldZxMI5s-qNot4"/>
+</div>
+<button class="absolute bottom-1 right-1 bg-primary text-white p-2 rounded-full shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div class="flex-1 text-center md:text-left">
+<div class="flex flex-col md:flex-row md:items-center gap-2 mb-1">
+<h2 class="text-2xl font-bold text-forest-green dark:text-white">Jean Dupont</h2>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                            Agronome Certifié
+                                        </span>
+</div>
+<p class="text-gray-500 dark:text-gray-400">Membre depuis Janvier 2023 • ID: AGRO-8842</p>
+<div class="mt-4 flex flex-wrap gap-3 justify-center md:justify-start">
+<button class="bg-primary text-white px-5 py-2 rounded-lg font-bold text-sm flex items-center gap-2 hover:bg-opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined text-lg">edit</span>
+                                            Modifier le profil
+                                        </button>
+<button class="bg-gray-100 dark:bg-gray-800 text-forest-green dark:text-white px-5 py-2 rounded-lg font-bold text-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all">
+                                            Télécharger CV Agro
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<section class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden" id="personal-info">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person</span>
+                                    Informations Personnelles
+                                </h3>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">Nom complet</label>
+<input class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-primary focus:border-primary" type="text" value="Jean Dupont"/>
+</div>
+<div class="space-y-1">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">Adresse Email</label>
+<input class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-primary focus:border-primary" type="email" value="jean.dupont@agro-conseil.fr"/>
+</div>
+<div class="space-y-1">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">Téléphone</label>
+<input class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-primary focus:border-primary" type="tel" value="+33 6 12 34 56 78"/>
+</div>
+<div class="space-y-1">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">Langue préférée</label>
+<select class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-primary focus:border-primary">
+<option selected="">Français (France)</option>
+<option>English (International)</option>
+<option>Español</option>
+</select>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden" id="professional-prefs">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">agriculture</span>
+                                    Préférences Professionnelles
+                                </h3>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">Rôle Principal</label>
+<select class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-primary focus:border-primary">
+<option selected="">Agronome Conseil</option>
+<option>Exploitant Agricole</option>
+<option>Chercheur en Sciences du Sol</option>
+<option>Analyste Marché Semences</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">Région principale d'activité</label>
+<input class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-primary focus:border-primary" type="text" value="Région Centre-Val de Loire, France"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">Expertises sols &amp; semences</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700">Blé tendre</span>
+<span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700">Maïs Grain</span>
+<span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700">Agriculture de conservation</span>
+<span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700">Analyse de fertilité</span>
+<button class="px-3 py-1 border border-dashed border-gray-300 dark:border-gray-600 rounded-full text-xs font-medium text-primary hover:bg-primary/5">+ Ajouter</button>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden" id="security">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shield</span>
+                                    Sécurité du Compte
+                                </h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex items-center justify-between p-4 bg-background-light dark:bg-gray-800/50 rounded-lg border border-gray-100 dark:border-gray-800">
+<div>
+<p class="font-bold text-forest-green dark:text-white">Mot de passe</p>
+<p class="text-sm text-gray-500">Dernière modification il y a 3 mois</p>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">Changer le mot de passe</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-background-light dark:bg-gray-800/50 rounded-lg border border-gray-100 dark:border-gray-800">
+<div>
+<p class="font-bold text-forest-green dark:text-white">Authentification à deux facteurs</p>
+<p class="text-sm text-gray-500">Sécurisez votre compte avec un code SMS ou une application</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-300 dark:bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden" id="notifications">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">notifications_active</span>
+                                    Préférences de Notification
+                                </h3>
+<p class="text-sm text-gray-500 mt-1">Choisissez comment AgroIA vous informe des changements critiques.</p>
+</div>
+<div class="p-6">
+<table class="w-full text-left">
+<thead>
+<tr class="text-xs font-bold text-gray-400 uppercase tracking-wider">
+<th class="pb-4">Type d'alerte</th>
+<th class="pb-4 text-center">Email</th>
+<th class="pb-4 text-center">SMS / App</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-500">cloud</span>
+<div>
+<p class="font-medium text-forest-green dark:text-white">Alertes Météo</p>
+<p class="text-xs text-gray-500">Précipitations, gel et vents forts</p>
+</div>
+</div>
+</td>
+<td class="py-4 text-center">
+<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</td>
+<td class="py-4 text-center">
+<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</td>
+</tr>
+<tr>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<div>
+<p class="font-medium text-forest-green dark:text-white">Recommandations IA</p>
+<p class="text-xs text-gray-500">Suggestions de semis et intrants</p>
+</div>
+</div>
+</td>
+<td class="py-4 text-center">
+<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</td>
+<td class="py-4 text-center">
+<input class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</td>
+</tr>
+<tr>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-600">monitoring</span>
+<div>
+<p class="font-medium text-forest-green dark:text-white">Santé des Sols</p>
+<p class="text-xs text-gray-500">Rapports d'analyse mensuels</p>
+</div>
+</div>
+</td>
+<td class="py-4 text-center">
+<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</td>
+<td class="py-4 text-center">
+<input class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden" id="subscription">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+                                    Mes Abonnements et Factures
+                                </h3>
+<p class="text-sm text-gray-500 mt-1">Gérez votre formule actuelle et consultez l'historique de vos paiements.</p>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+<div class="p-4 bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-xl">
+<p class="text-sm font-semibold text-gray-600 dark:text-gray-400">Plan actuel</p>
+<div class="flex items-center justify-between mt-1">
+<h4 class="text-xl font-black text-forest-green dark:text-white">Pack Agronome Pro</h4>
+<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold uppercase rounded">Actif</span>
+</div>
+<p class="text-sm text-gray-500 mt-2">Accès complet aux cartes haute résolution et recommandations IA illimitées.</p>
+</div>
+<div class="p-4 bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700 rounded-xl">
+<p class="text-sm font-semibold text-gray-600 dark:text-gray-400">Prochain renouvellement</p>
+<h4 class="text-xl font-bold text-forest-green dark:text-white mt-1">15 Mars 2024</h4>
+<p class="text-sm text-gray-500 mt-2">Le montant de 49.00€ sera prélevé via votre mode de paiement par défaut.</p>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Factures récentes</h4>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 dark:border-gray-800">
+<th class="pb-3 px-2">Date</th>
+<th class="pb-3 px-2">Numéro</th>
+<th class="pb-3 px-2">Montant</th>
+<th class="pb-3 px-2">Statut</th>
+<th class="pb-3 px-2 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-50 dark:divide-gray-800">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="py-4 px-2 text-sm text-forest-green dark:text-gray-300">15 Fév 2024</td>
+<td class="py-4 px-2 text-sm font-medium text-gray-600 dark:text-gray-400">#INV-2024-002</td>
+<td class="py-4 px-2 text-sm font-bold">49.00€</td>
+<td class="py-4 px-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">PAYÉ</span>
+</td>
+<td class="py-4 px-2 text-right">
+<button class="text-primary hover:text-green-700 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="py-4 px-2 text-sm text-forest-green dark:text-gray-300">15 Jan 2024</td>
+<td class="py-4 px-2 text-sm font-medium text-gray-600 dark:text-gray-400">#INV-2024-001</td>
+<td class="py-4 px-2 text-sm font-bold">49.00€</td>
+<td class="py-4 px-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">PAYÉ</span>
+</td>
+<td class="py-4 px-2 text-right">
+<button class="text-primary hover:text-green-700 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="py-4 px-2 text-sm text-forest-green dark:text-gray-300">15 Déc 2023</td>
+<td class="py-4 px-2 text-sm font-medium text-gray-600 dark:text-gray-400">#INV-2023-012</td>
+<td class="py-4 px-2 text-sm font-bold">49.00€</td>
+<td class="py-4 px-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">PAYÉ</span>
+</td>
+<td class="py-4 px-2 text-right">
+<button class="text-primary hover:text-green-700 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<div class="flex justify-end items-center gap-4 pt-4 pb-10">
+<button class="px-6 py-2.5 rounded-lg font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Annuler</button>
+<button class="bg-primary text-white px-8 py-2.5 rounded-lg font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">Enregistrer les modifications</button>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-12 border-t border-gray-200 dark:border-gray-800 py-8 px-10 text-center text-gray-500 text-sm">
+<p>© 2024 AgroIA Solutions. Tous droits réservés. Intelligence Artificielle au service de la terre.</p>
+<div class="flex justify-center gap-6 mt-4">
+<a class="hover:text-primary" href="#">Conditions d'utilisation</a>
+<a class="hover:text-primary" href="#">Politique de confidentialité</a>
+<a class="hover:text-primary" href="#">Support technique</a>
+</div>
+</footer>
+</div>
+</div>
+
+</body></html>

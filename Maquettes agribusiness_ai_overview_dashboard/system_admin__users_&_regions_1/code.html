@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Administration : Utilisateurs et Régions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234823;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#234823] px-6 py-3 bg-white dark:bg-[#112211] sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">precision_manufacturing</span>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">AgriSystem Admin</h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1" href="#">Tableau de bord</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="#">Utilisateurs</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="#">Régions</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="#">Historique</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="hidden lg:flex flex-col min-w-64 !h-9">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-[#234823] overflow-hidden">
+<div class="text-slate-400 dark:text-[#92c992] flex bg-slate-50 dark:bg-[#234823] items-center justify-center px-3 border-r-0">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 border-none bg-slate-50 dark:bg-[#234823] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#92c992] px-2 text-sm focus:ring-0" placeholder="Rechercher une commande système..."/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="relative flex items-center justify-center rounded-lg size-9 bg-slate-100 dark:bg-[#234823] text-slate-600 dark:text-white hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute top-1.5 right-1.5 size-2 bg-primary rounded-full ring-2 ring-white dark:ring-[#112211]"></span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-9 bg-slate-100 dark:bg-[#234823] text-slate-600 dark:text-white hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+</div>
+<div class="size-9 rounded-full bg-primary/20 border-2 border-primary overflow-hidden">
+<img alt="Photo de profil admin" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoYlEM68qBSYSgkOVGU1-DEW9uvHnMkVIpcuu35xvC_L_EjiM82AHupjeCBrTXEWjRox-Nt2yD4FYTa8-Bc2iGx2Rq16CiJQrEfyGk1Zh8HC0LEk3xKhyK6hlxChOkvWSSbS8HAEwsC7x9RFOhOy0R47Wq4GUgBT8m7e2rA4dRbH0ids7X-go5ST0lvQsYylU9sUDt6Vmy9mTRozRr8v29pVNPZs1-hRcQ-m7JNVRje83vZtHk8eKOvjyg7I0JyZYUKDa8A89WDtQ"/>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col p-6 gap-6">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-2xl font-bold">Administration : Utilisateurs et Régions</h1>
+<p class="text-slate-500 dark:text-[#92c992] text-sm">Système de recommandation agrobusiness basé sur l'IA</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-slate-200 dark:border-[#326732] bg-white dark:bg-[#1a2e1a] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-bold uppercase tracking-wider">Utilisateurs Actifs</p>
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-black leading-tight">1 284</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+<p class="text-primary text-xs font-bold">+12,5% vs mois dernier</p>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-slate-200 dark:border-[#326732] bg-white dark:bg-[#1a2e1a] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-bold uppercase tracking-wider">Régions Actives</p>
+<span class="material-symbols-outlined text-primary">map</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-black leading-tight">42</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-slate-400 text-sm">horizontal_rule</span>
+<p class="text-slate-400 text-xs font-bold">Performance stable</p>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-slate-200 dark:border-[#326732] bg-white dark:bg-[#1a2e1a] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-bold uppercase tracking-wider">Précision IA</p>
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-black leading-tight">98,2%</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+<p class="text-primary text-xs font-bold">+0,4% optimisation</p>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-slate-200 dark:border-[#326732] bg-white dark:bg-[#1a2e1a] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-[#92c992] text-xs font-bold uppercase tracking-wider">Santé Système</p>
+<span class="material-symbols-outlined text-primary">dns</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-black leading-tight">99,9%</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<p class="text-primary text-xs font-bold">Tous les nœuds opérationnels</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-6 flex-1">
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-4">
+<div class="bg-white dark:bg-[#1a2e1a] rounded-xl border border-slate-200 dark:border-[#326732] flex flex-col overflow-hidden">
+<div class="p-5 flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 dark:border-[#234823]">
+<div>
+<h3 class="text-slate-900 dark:text-white text-xl font-bold">Gestion des Utilisateurs</h3>
+<p class="text-slate-500 dark:text-[#92c992] text-sm">Gérer les accès et les rôles par région</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 bg-slate-100 dark:bg-[#234823] text-slate-700 dark:text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-200 dark:hover:bg-[#2d5c2d] transition-all">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                                Filtres
+                            </button>
+<button class="flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-lg text-sm font-bold hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                                Nouvel Utilisateur
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-[#234823]/50 text-slate-500 dark:text-[#92c992] text-xs uppercase font-bold tracking-wider">
+<tr>
+<th class="px-6 py-4">Nom</th>
+<th class="px-6 py-4">Rôle</th>
+<th class="px-6 py-4">Région</th>
+<th class="px-6 py-4">Statut</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-[#234823]">
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Miniature profil utilisateur" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgYlmt3sX_SSp3XWSeaBTDbD7df3-phWEcXjFRzjrLrdp3JMkXJ_RaKf3lF-jR2zaj997YD0SCeYn0lAe7VxxmhDAUo6Q4Oo-B7b8NotMbaLPSTCZHhFzzh7v2dINGgzpq2HMAys5GTr01-aM4PTOvey4MncnTEE78o9hpQs8uKR1LhjzFqHY_HUXVe7nNuYbOWojUvd2C5NfQLlUxkKBqvvP_ZWtqvccNUUzqsuBqzst79XRRx_WrvVANpXxVgd9Feq-o9zOnrus"/>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">Dr. Elena Thorne</p>
+<p class="text-slate-500 dark:text-[#92c992] text-xs">elena.thorne@agrisys.io</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-widest bg-primary/20 text-primary border border-primary/30">Scientifique de Données</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-600 dark:text-slate-300 text-sm">
+<span class="material-symbols-outlined text-sm text-primary">location_on</span>
+                                            Brésil Sud
+                                        </div>
+</td>
+<td class="px-6 py-4">
+<div class="relative inline-flex items-center cursor-pointer">
+<div class="w-9 h-5 bg-primary/40 rounded-full"></div>
+<div class="absolute left-1 top-1 w-3 h-3 bg-primary rounded-full transform translate-x-4"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Miniature profil utilisateur" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt2uYw4mAgBRiN1nZY-oT4ZKLqunMryv36tsuJ99pPcNvMbVPOkzIUeqoO7EaSNA7jhTQa1j6lpdDmGVphQiprTZ1FhmgF7Lrd4HV9aT1UiNfh6nmJv_17tXKhjo1R9BBa_9RIXGgnciPL3oonXdljCL77Kuyq44u4xl9V7DXF5wHYtbzaThhWFPiKbLdY4aJfV8smZ-gEth53CO47_B8uV0ZEZ1DFGX3nA4jlH5ISTkXUn7nfCN6XqsMy2AzwGe_8ZnlEdJSShSY"/>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">Marcus Chen</p>
+<p class="text-slate-500 dark:text-[#92c992] text-xs">m.chen@agrisys.io</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-widest bg-blue-500/20 text-blue-400 border border-blue-500/30">Responsable Terrain</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-600 dark:text-slate-300 text-sm">
+<span class="material-symbols-outlined text-sm text-primary">location_on</span>
+                                            Vallée Centrale, CA
+                                        </div>
+</td>
+<td class="px-6 py-4">
+<div class="relative inline-flex items-center cursor-pointer">
+<div class="w-9 h-5 bg-primary/40 rounded-full"></div>
+<div class="absolute left-1 top-1 w-3 h-3 bg-primary rounded-full transform translate-x-4"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Miniature profil utilisateur" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcsUCFiJIDrOdmVVsB54Rpxh1wQ5Vdk0TM7ww3Y9SfJOp7y83PzZ4zdD08OlvnJZXhcI6ubhJjBnVN0ghfL9P4GRGc_np7MlC70pP5PXSa3puFLsta3ruvsXnT2oufQRROR90O9lfnAL8eot_YvitYzWcF1ULegNVhoWB9caYrGjjSzrd0GFQbf1xNB5JZ4BbQTmj1GNVpEeGhlM7LdiVK1yS0wUALQ6Jq2Ifdg0PokXJaECPXLug23dXc5LePoX-Y_GEY4Q5bOts"/>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">Sarah Jenkins</p>
+<p class="text-slate-500 dark:text-[#92c992] text-xs">s.jenkins@agrisys.io</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-widest bg-slate-500/20 text-slate-400 border border-slate-500/30">Admin Système</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-600 dark:text-slate-300 text-sm">
+<span class="material-symbols-outlined text-sm text-primary">location_on</span>
+                                            Global / Distant
+                                        </div>
+</td>
+<td class="px-6 py-4">
+<div class="relative inline-flex items-center cursor-pointer">
+<div class="w-9 h-5 bg-slate-300 dark:bg-[#234823] rounded-full"></div>
+<div class="absolute left-1 top-1 w-3 h-3 bg-slate-400 dark:bg-slate-600 rounded-full transform translate-x-0"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Miniature profil utilisateur" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyXFHCv9frZrxIv3Rqy4QINw04RY0D30jtm7u0KQJVHcaY3UMWgYKi8GrwzBvWc4LOIXaACIGQpVN0j0W6xWGRgJiUzt2XhGBccRkmSamJXgDBwmDcSDDJ_3SN_dTcb3csPryd-ObWWsizKuSBVAaSSar-SimAnbWnGeF49YwPw9ov4UZZJ4mWfCrDAkOK23J8gBAfbk7NMHtmzBS0AI4-CwHy0CUnw7hxk0zZWaQ6Nuh9B8gLJIujcuEN1CsalSdWKRZQryE2p0M"/>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">Oscar Schmidt</p>
+<p class="text-slate-500 dark:text-[#92c992] text-xs">oscar.s@agrisys.io</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-widest bg-primary/20 text-primary border border-primary/30">Scientifique de Données</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-600 dark:text-slate-300 text-sm">
+<span class="material-symbols-outlined text-sm text-primary">location_on</span>
+                                            Basse-Saxe
+                                        </div>
+</td>
+<td class="px-6 py-4">
+<div class="relative inline-flex items-center cursor-pointer">
+<div class="w-9 h-5 bg-primary/40 rounded-full"></div>
+<div class="absolute left-1 top-1 w-3 h-3 bg-primary rounded-full transform translate-x-4"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-slate-100 dark:border-[#234823] flex items-center justify-between">
+<p class="text-xs text-slate-500 dark:text-[#92c992]">Affichage de 4 sur 1 284 utilisateurs</p>
+<div class="flex gap-1">
+<button class="size-8 flex items-center justify-center rounded bg-slate-50 dark:bg-[#234823] text-slate-500 dark:text-white text-xs hover:bg-primary hover:text-black transition-all">1</button>
+<button class="size-8 flex items-center justify-center rounded bg-white dark:bg-transparent text-slate-500 dark:text-white text-xs hover:bg-slate-100 dark:hover:bg-white/5 transition-all">2</button>
+<button class="size-8 flex items-center justify-center rounded bg-white dark:bg-transparent text-slate-500 dark:text-white text-xs hover:bg-slate-100 dark:hover:bg-white/5 transition-all">3</button>
+<button class="size-8 flex items-center justify-center rounded bg-white dark:bg-transparent text-slate-500 dark:text-white text-xs hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2e1a] rounded-xl border border-slate-200 dark:border-[#326732] flex flex-col h-64 shadow-sm">
+<div class="px-5 py-3 border-b border-slate-100 dark:border-[#234823] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">terminal</span>
+<h3 class="text-slate-900 dark:text-white text-sm font-bold uppercase tracking-tight">Historique Global des Actions</h3>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] bg-primary text-black font-bold">EN DIRECT</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-3 font-mono text-xs custom-scrollbar">
+<div class="flex gap-3">
+<span class="text-slate-400 shrink-0">[14:22:01]</span>
+<span class="text-primary">INFO:</span>
+<p class="text-slate-600 dark:text-slate-300">Modèle IA 'Soil-V4-2' déployé avec succès dans la Vallée Centrale (ID: #402).</p>
+</div>
+<div class="flex gap-3">
+<span class="text-slate-400 shrink-0">[14:18:55]</span>
+<span class="text-primary">USER:</span>
+<p class="text-slate-600 dark:text-slate-300">Admin [Sarah Jenkins] a mis à jour les permissions pour l'utilisateur [Marcus Chen].</p>
+</div>
+<div class="flex gap-3">
+<span class="text-slate-400 shrink-0">[14:15:22]</span>
+<span class="text-amber-500">WARN:</span>
+<p class="text-slate-600 dark:text-slate-300">Pic de latence détecté sur le nœud de bordure [Brésil Sud]. Redirection du trafic...</p>
+</div>
+<div class="flex gap-3">
+<span class="text-slate-400 shrink-0">[14:12:10]</span>
+<span class="text-primary">INFO:</span>
+<p class="text-slate-600 dark:text-slate-300">Nouveau jeu de données géospatiales régionales téléchargé pour la Basse-Saxe. Calcul des scores de santé.</p>
+</div>
+<div class="flex gap-3">
+<span class="text-slate-400 shrink-0">[14:05:33]</span>
+<span class="text-red-500">ERR:</span>
+<p class="text-slate-600 dark:text-slate-300">Échec de tentative de connexion depuis 192.168.1.1. Compte verrouillé pendant 30m.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+<div class="bg-white dark:bg-[#1a2e1a] rounded-xl border border-slate-200 dark:border-[#326732] flex flex-col flex-1 shadow-sm">
+<div class="p-5 border-b border-slate-100 dark:border-[#234823]">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold">Supervision Régionale</h3>
+<p class="text-slate-500 dark:text-[#92c992] text-sm">Vue d'ensemble du déploiement IA géospatial</p>
+</div>
+<div class="relative flex-1 bg-slate-100 dark:bg-black/20 m-4 rounded-lg overflow-hidden border border-slate-200 dark:border-[#234823]">
+<div class="absolute inset-0 opacity-50 dark:opacity-30 bg-[url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&amp;w=800&amp;auto=format&amp;fit=crop')] bg-cover bg-center grayscale"></div>
+<div class="absolute top-1/4 left-1/4 animate-pulse">
+<div class="size-4 bg-primary rounded-full shadow-[0_0_15px_rgba(19,236,19,0.8)]"></div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-black/80 text-primary text-[8px] font-bold px-1.5 py-0.5 rounded border border-primary/50 whitespace-nowrap">CALIFORNIE</div>
+</div>
+<div class="absolute top-2/3 left-1/3">
+<div class="size-4 bg-primary rounded-full shadow-[0_0_15px_rgba(19,236,19,0.8)]"></div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-black/80 text-primary text-[8px] font-bold px-1.5 py-0.5 rounded border border-primary/50 whitespace-nowrap">BRÉSIL S.</div>
+</div>
+<div class="absolute top-1/3 left-2/3 animate-pulse" style="animation-delay: 1s;">
+<div class="size-4 bg-primary rounded-full shadow-[0_0_15px_rgba(19,236,19,0.8)]"></div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-black/80 text-primary text-[8px] font-bold px-1.5 py-0.5 rounded border border-primary/50 whitespace-nowrap">EUROPE O.</div>
+</div>
+<div class="absolute bottom-1/4 right-1/4">
+<div class="size-4 bg-primary rounded-full shadow-[0_0_15px_rgba(19,236,19,0.8)]"></div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-black/80 text-primary text-[8px] font-bold px-1.5 py-0.5 rounded border border-primary/50 whitespace-nowrap">AUSTRALIE</div>
+</div>
+<div class="absolute bottom-4 right-4 flex flex-col gap-2">
+<button class="size-8 bg-white dark:bg-[#112211] rounded shadow flex items-center justify-center text-slate-600 dark:text-white hover:text-primary"><span class="material-symbols-outlined text-lg">add</span></button>
+<button class="size-8 bg-white dark:bg-[#112211] rounded shadow flex items-center justify-center text-slate-600 dark:text-white hover:text-primary"><span class="material-symbols-outlined text-lg">remove</span></button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#234823]/30 border border-slate-200 dark:border-[#326732]">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">grass</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Vallée Centrale</p>
+<p class="text-[10px] text-slate-500 dark:text-[#92c992] uppercase">Santé Sol : Optimal</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">92%</p>
+<p class="text-[10px] text-slate-400">Opt. Rendement</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#234823]/30 border border-slate-200 dark:border-[#326732]">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-amber-500/20 flex items-center justify-center text-amber-500">
+<span class="material-symbols-outlined text-xl">water_drop</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Brésil Sud</p>
+<p class="text-[10px] text-slate-500 dark:text-[#92c992] uppercase">Humidité : Basse</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-amber-500">64%</p>
+<p class="text-[10px] text-slate-400">Opt. Rendement</p>
+</div>
+</div>
+</div>
+<div class="p-4 pt-0">
+<button class="w-full py-2 bg-slate-100 dark:bg-[#234823] text-slate-700 dark:text-white rounded-lg text-sm font-bold hover:bg-primary hover:text-black transition-all">Voir toutes les analyses régionales</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="px-6 py-2 border-t border-slate-200 dark:border-[#234823] bg-white dark:bg-[#112211] flex items-center justify-between text-[10px] text-slate-400 dark:text-[#92c992] font-medium uppercase tracking-widest">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-1.5">
+<span class="size-1.5 bg-primary rounded-full animate-pulse"></span>
+                API: V2.4.1-STABLE
+            </div>
+<div class="flex items-center gap-1.5">
+<span class="size-1.5 bg-primary rounded-full"></span>
+                BASE DE DONNÉES: CLUSTER-01 [ACTIVE]
+            </div>
+</div>
+<div>
+            Dernière mise à jour : 14:23:45 UTC
+        </div>
+</footer>
+</div>
+
+</body></html>

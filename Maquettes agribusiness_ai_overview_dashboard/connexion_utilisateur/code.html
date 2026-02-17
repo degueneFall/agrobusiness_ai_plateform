@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Connexion | AgroAI Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#11d411",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen font-display">
+<div class="flex min-h-screen flex-col lg:flex-row">
+<!-- Left Side: Visual Inspiration -->
+<div class="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-background-dark/80 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="Digital agriculture interface overlaying a lush green field" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAVCj-KnvksBkPsMifH-vhDjq-JxEoeSAinOMeD0dE5xXH-KBLnM2aXbca3eJTZCPTWkejvnS3CYckhANO9S1JLXkBqGBwFI6ZhVvwixo5MSuXyspmnFxswnkplsKYRTigXHouD6VuO7Uzp9kkCuQ4vv-8BJJ2WKaRhPvSBaWHVg_8tvz-cVh31_TuBO6IYMh4j8YA5ZHY-U3ExdRkTWXYaVaQN9go28FJV-iBnfZuKzh59cYbu3FITDqbyO_jVPqXSsHMgEmrCaJ0');">
+</div>
+<div class="relative z-20 flex flex-col justify-end p-16 w-full">
+<div class="max-w-md">
+<h2 class="text-4xl font-bold text-white mb-6 leading-tight">L'intelligence artificielle au service de votre terre.</h2>
+<p class="text-lg text-white/80 leading-relaxed">
+                        Optimisez vos rendements avec nos analyses de santé des sols en temps réel et notre cartographie haute précision.
+                    </p>
+</div>
+<div class="mt-12 flex gap-8">
+<div class="flex flex-col">
+<span class="text-primary text-2xl font-bold">98%</span>
+<span class="text-white/60 text-sm">Précision IA</span>
+</div>
+<div class="flex flex-col">
+<span class="text-primary text-2xl font-bold">15k+</span>
+<span class="text-white/60 text-sm">Exploitations</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Login Form -->
+<div class="flex-1 flex flex-col items-center justify-center p-6 md:p-12 lg:p-20 bg-background-light dark:bg-background-dark">
+<div class="w-full max-w-md space-y-8">
+<!-- Logo & Header -->
+<div class="text-center lg:text-left">
+<div class="flex items-center gap-3 mb-8 justify-center lg:justify-start">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-background-dark">
+<svg class="size-6" fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"></path>
+</svg>
+</div>
+<h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">AgroAI Pro</h1>
+</div>
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white">Bon retour parmi nous</h2>
+<p class="mt-2 text-slate-600 dark:text-white/60">Connectez-vous pour accéder à vos tableaux de bord.</p>
+</div>
+<!-- Form -->
+<form class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-white/80 mb-2" for="email">Adresse e-mail</label>
+<input class="block w-full rounded-lg border-0 py-3.5 px-4 bg-white dark:bg-[#193319] text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-[#326732] placeholder:text-slate-400 dark:placeholder:text-[#92c992] focus:ring-2 focus:ring-inset focus:ring-primary outline-none transition-all" id="email" name="email" placeholder="agriculteur@domaine.fr" required="" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-white/80 mb-2" for="password">Mot de passe</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-0 py-3.5 px-4 bg-white dark:bg-[#193319] text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-[#326732] placeholder:text-slate-400 dark:placeholder:text-[#92c992] focus:ring-2 focus:ring-inset focus:ring-primary outline-none transition-all" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 dark:text-[#92c992] hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-slate-300 dark:border-[#326732] bg-white dark:bg-[#193319] text-primary focus:ring-primary" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block text-sm text-slate-600 dark:text-white/60" for="remember-me">Se souvenir de moi</label>
+</div>
+<div class="text-sm">
+<a class="font-medium text-primary hover:text-primary/80" href="#">Mot de passe oublié ?</a>
+</div>
+</div>
+<div>
+<button class="flex w-full justify-center rounded-lg bg-primary px-4 py-3.5 text-sm font-bold leading-6 text-background-dark shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all" type="submit">
+                            Se connecter
+                        </button>
+</div>
+</form>
+<!-- Divider -->
+<div class="relative">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-slate-200 dark:border-[#234823]"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="bg-background-light dark:bg-background-dark px-2 text-slate-500 dark:text-white/40 uppercase tracking-wider text-xs font-semibold">ou continuer avec</span>
+</div>
+</div>
+<!-- Social Login -->
+<div>
+<button class="flex w-full items-center justify-center gap-3 rounded-lg bg-white dark:bg-transparent px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-[#326732] hover:bg-slate-50 dark:hover:bg-white/5 transition-all" type="button">
+<svg class="h-5 w-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span>Continuer avec Google</span>
+</button>
+</div>
+<!-- Sign up footer -->
+<p class="text-center text-sm text-slate-600 dark:text-white/60">
+                    Pas encore de compte ? 
+                    <a class="font-bold leading-6 text-primary hover:text-primary/80" href="#">Commencer l'essai gratuit</a>
+</p>
+</div>
+</div>
+</div>
+</body></html>

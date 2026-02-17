@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vérification du Compte | AgroAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .otp-input:focus {
+            border-color: #13ec13;
+            ring: 2px;
+            ring-color: rgba(19, 236, 19, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display transition-colors duration-300">
+<!-- Top Navigation Bar -->
+<header class="w-full bg-white dark:bg-black/20 border-b border-gray-200 dark:border-white/10 px-6 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-background-dark">
+<span class="material-symbols-outlined font-bold">agriculture</span>
+</div>
+<h1 class="text-xl font-bold text-gray-900 dark:text-white tracking-tight">AgroAI</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" href="#">Santé des sols</a>
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" href="#">Cartographie</a>
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" href="#">Semences</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 rounded-full">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex items-center justify-center p-6">
+<div class="max-w-md w-full bg-white dark:bg-zinc-900 rounded-xl shadow-xl border border-gray-100 dark:border-white/5 overflow-hidden">
+<!-- Top Illustration/Icon Section -->
+<div class="bg-primary/10 dark:bg-primary/5 py-10 flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, #13ec13 1px, transparent 0); background-size: 24px 24px;"></div>
+<div class="relative">
+<div class="size-20 bg-white dark:bg-zinc-800 rounded-2xl shadow-lg flex items-center justify-center mb-4 z-10 relative">
+<span class="material-symbols-outlined text-4xl text-primary">vibration</span>
+</div>
+<div class="absolute -top-2 -right-2 size-6 bg-primary rounded-full border-4 border-white dark:border-zinc-900 animate-pulse"></div>
+</div>
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-4">Vérifiez votre compte</h2>
+<p class="text-gray-500 dark:text-gray-400 text-sm mt-2 text-center px-8">
+                    Sécurité renforcée pour vos données agricoles
+                </p>
+</div>
+<!-- OTP Form Section -->
+<div class="p-8">
+<div class="text-center mb-8">
+<p class="text-gray-600 dark:text-gray-300">
+                        Un code de 6 chiffres a été envoyé à l'adresse e-mail associée à votre compte.
+                    </p>
+<p class="font-semibold text-gray-900 dark:text-white mt-1">m****@agrotech.ai</p>
+</div>
+<form class="space-y-8">
+<!-- OTP Inputs -->
+<div class="flex justify-between gap-2 max-w-xs mx-auto">
+<input class="w-12 h-14 text-center text-xl font-bold bg-gray-50 dark:bg-zinc-800 border-2 border-gray-200 dark:border-zinc-700 rounded-lg focus:border-primary focus:ring-0 transition-all dark:text-white" maxlength="1" required="" type="text"/>
+<input class="w-12 h-14 text-center text-xl font-bold bg-gray-50 dark:bg-zinc-800 border-2 border-gray-200 dark:border-zinc-700 rounded-lg focus:border-primary focus:ring-0 transition-all dark:text-white" maxlength="1" required="" type="text"/>
+<input class="w-12 h-14 text-center text-xl font-bold bg-gray-50 dark:bg-zinc-800 border-2 border-gray-200 dark:border-zinc-700 rounded-lg focus:border-primary focus:ring-0 transition-all dark:text-white" maxlength="1" required="" type="text"/>
+<input class="w-12 h-14 text-center text-xl font-bold bg-gray-50 dark:bg-zinc-800 border-2 border-gray-200 dark:border-zinc-700 rounded-lg focus:border-primary focus:ring-0 transition-all dark:text-white" maxlength="1" required="" type="text"/>
+<input class="w-12 h-14 text-center text-xl font-bold bg-gray-50 dark:bg-zinc-800 border-2 border-gray-200 dark:border-zinc-700 rounded-lg focus:border-primary focus:ring-0 transition-all dark:text-white" maxlength="1" required="" type="text"/>
+<input class="w-12 h-14 text-center text-xl font-bold bg-gray-50 dark:bg-zinc-800 border-2 border-gray-200 dark:border-zinc-700 rounded-lg focus:border-primary focus:ring-0 transition-all dark:text-white" maxlength="1" required="" type="text"/>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-4">
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-lg transition-all shadow-lg shadow-primary/20 active:scale-[0.98]" type="submit">
+                            Vérifier l'identité
+                        </button>
+<div class="text-center pt-2">
+<p class="text-sm text-gray-500 dark:text-gray-400">
+                                Vous n'avez pas reçu le code ? 
+                                <button class="text-primary font-semibold hover:underline ml-1" type="button">Renvoyer le code</button>
+</p>
+<p class="text-xs text-gray-400 dark:text-gray-500 mt-4 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-xs">timer</span>
+                                Expire dans 02:45
+                            </p>
+</div>
+</div>
+</form>
+</div>
+<!-- Footer Meta Info -->
+<div class="px-8 pb-8 flex items-center justify-center gap-6 border-t border-gray-50 dark:border-white/5 pt-6">
+<div class="flex items-center gap-2 text-gray-400 text-[10px] uppercase tracking-widest font-bold">
+<span class="material-symbols-outlined text-sm">lock</span>
+                    Sécurisé par AgroAI
+                </div>
+</div>
+</div>
+</main>
+<!-- Background Decoration Elements -->
+<div class="fixed bottom-0 left-0 p-8 pointer-events-none opacity-20">
+<div class="bg-primary/20 size-64 blur-[100px] rounded-full"></div>
+</div>
+<div class="fixed top-0 right-0 p-8 pointer-events-none opacity-20">
+<div class="bg-primary/10 size-96 blur-[120px] rounded-full"></div>
+</div>
+<!-- Global Footer -->
+<footer class="w-full py-6 px-10 border-t border-gray-200 dark:border-white/10 mt-auto">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+<p>© 2024 AgroAI Systems. Tous droits réservés.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="hover:text-primary transition-colors" href="#">Conditions d'utilisation</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>
