@@ -30,7 +30,8 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
         password: configService.get<string>('DB_PASSWORD', ''),
         database: configService.get<string>('DB_NAME', 'agribusiness_ai_db'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true, // Only for development
+        synchronize: false, // Disabled to prevent conflicts with existing foreign keys
+        logging: true, // Enable logging to debug
       }),
       inject: [ConfigService],
     }),

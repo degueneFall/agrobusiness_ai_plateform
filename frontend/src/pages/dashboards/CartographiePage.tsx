@@ -115,9 +115,10 @@ const CartographiePage: React.FC = () => {
             filtered.map((p) => {
               const t = tag(p);
               return (
-                <div
+                <Link
+                  to={`/dashboard/parcelles/${p.id}`}
                   key={p.id}
-                  className="group p-3 rounded-xl bg-slate-50 dark:bg-emerald-900/10 border border-slate-100 dark:border-emerald-900/20 hover:border-primary/50 transition-all cursor-pointer"
+                  className="group p-3 rounded-xl bg-slate-50 dark:bg-emerald-900/10 border border-slate-100 dark:border-emerald-900/20 hover:border-primary/50 hover:shadow-md transition-all cursor-pointer"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div className="h-10 w-10 rounded-lg bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
@@ -125,13 +126,13 @@ const CartographiePage: React.FC = () => {
                     </div>
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${t.class}`}>{t.label}</span>
                   </div>
-                  <h3 className="text-sm font-semibold text-slate-800 dark:text-white">{p.name}</h3>
+                  <h3 className="text-sm font-semibold text-slate-800 dark:text-white group-hover:text-primary transition-colors">{p.name}</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{p.areaHectares} ha • {p.soilType ? soilLabel[p.soilType] || p.soilType : '—'}</p>
                   <div className="mt-3 grid grid-cols-2 gap-2 text-[10px]">
                     <span className="text-slate-500 uppercase">NDVI: <span className="text-primary font-bold">{p.ndviScore != null ? Number(p.ndviScore).toFixed(2) : '—'}</span></span>
                     <span className="text-slate-500 uppercase">pH: <span className="text-slate-700 dark:text-slate-200 font-bold">{p.soilPh != null ? Number(p.soilPh) : '—'}</span></span>
                   </div>
-                </div>
+                </Link>
               );
             })
           )}

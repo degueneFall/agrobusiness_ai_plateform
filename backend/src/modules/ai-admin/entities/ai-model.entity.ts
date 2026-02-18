@@ -7,38 +7,45 @@ export enum AiModelType {
     PEST_DETECTION = 'pest_detection',
 }
 
-@Entity('ai_models')
+@Entity('modeles_ia')
 export class AiModel {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'id_modele' })
     id: number;
 
-    @Column()
+    @Column({ name: 'nom_modele' })
     name: string;
 
-    @Column()
+    @Column({ name: 'type_modele', nullable: true })
+    modelType: string;
+
+    @Column({ name: 'precision', type: 'float', nullable: true })
+    accuracy: number;
+
+    @Column({ name: 'date_entrainement', type: 'date', nullable: true })
+    trainingDate: Date;
+
+    @Column({ name: 'hyperparametres', type: 'json', nullable: true })
+    parameters: any;
+
+    @Column({ type: 'enum', enum: ['entraînement', 'production', 'archivé'], default: 'entraînement' })
+    statut: string;
+
+    // Properties in Entity but not in Table (or different):
+    // version, description, isActive are not in schema.sql's modeles_ia.
+    // schema.sql has: id_modele, nom_modele, type_modele, precision, date_entrainement, chemin_fichier, hyperparametres, variables_entree, statut.
+
+    @Column({ name: 'version', nullable: true }) // Not in schema, might error if strict. We can remove or leave if column added later.
     version: string;
 
-    @Column({ type: 'enum', enum: AiModelType, name: 'model_type', nullable: true })
-    modelType: AiModelType;
-
-    @Column({ type: 'text', nullable: true })
+    @Column({ name: 'description', type: 'text', nullable: true })
     description: string;
-
-    @Column({ type: 'decimal', precision: 5, scale: 2, nullable: true })
-    accuracy: number;
 
     @Column({ name: 'is_active', default: true })
     isActive: boolean;
 
-    @Column({ name: 'training_date', type: 'timestamp', nullable: true })
-    trainingDate: Date;
-
-    @Column({ type: 'json', nullable: true })
-    parameters: any;
-
-    @CreateDateColumn({ name: 'created_at' })
+    @CreateDateColumn({ name: 'created_at', nullable: true }) // schema lacks created_at
     createdAt: Date;
 
-    @UpdateDateColumn({ name: 'updated_at' })
+    @UpdateDateColumn({ name: 'updated_at', nullable: true }) // logic missing
     updatedAt: Date;
 }

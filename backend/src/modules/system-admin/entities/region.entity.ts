@@ -1,32 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
-import { Plot } from '../../plots/entities/plot.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Zone } from './zone.entity';
 
 @Entity('regions')
 export class Region {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'id_region' })
     id: number;
 
-    @Column()
+    @Column({ name: 'nom_region' })
     name: string;
 
-    @Column({ unique: true, nullable: true })
-    code: string;
-
-    @Column({ default: 'Sénégal' })
+    @Column({ name: 'pays', default: 'Sénégal' })
     country: string;
 
-    @Column({ name: 'climate_zone', nullable: true })
-    climateZone: string;
-
-    @Column({ name: 'average_rainfall', type: 'decimal', precision: 10, scale: 2, nullable: true })
-    averageRainfall: number;
-
-    @CreateDateColumn({ name: 'created_at' })
-    createdAt: Date;
-
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Date;
-
-    @OneToMany(() => Plot, (plot) => plot.region)
-    plots: Plot[];
+    @OneToMany(() => Zone, (zone) => zone.region)
+    zones: Zone[];
 }

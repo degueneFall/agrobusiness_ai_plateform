@@ -14,7 +14,7 @@ export class AiCompatibilityService {
     private plotRepo: Repository<Plot>,
     @InjectRepository(Seed)
     private seedRepo: Repository<Seed>,
-  ) {}
+  ) { }
 
   async getRecommendationsByPlot(plotId: number, userId: number): Promise<AiRecommendation[]> {
     const plot = await this.plotRepo.findOne({ where: { id: plotId, userId } });
@@ -51,19 +51,20 @@ export class AiCompatibilityService {
     }
     const reasoning: string[] = [];
     let score = 80;
-    const plotPh = plot.soilPh != null ? Number(plot.soilPh) : 6.5;
+    // Properties removed from DB schema: soilPh, ndviScore. Using defaults for now.
+    const plotPh = 6.5; // (plot as any).soilPh != null ? Number((plot as any).soilPh) : 6.5;
     const phMin = seed.optimalPhMin != null ? Number(seed.optimalPhMin) : 6;
     const phMax = seed.optimalPhMax != null ? Number(seed.optimalPhMax) : 7.5;
     if (plotPh >= phMin && plotPh <= phMax) {
       score += 10;
-      reasoning.push('pH du sol dans la plage optimale');
+      reasoning.push('pH du sol dans la plage optimale (Simulé)');
     } else {
-      reasoning.push('pH du sol hors plage optimale');
+      reasoning.push('pH du sol hors plage optimale (Simulé)');
     }
-    if (plot.ndviScore != null && Number(plot.ndviScore) >= 0.6) {
-      score += 5;
-      reasoning.push('NDVI favorable');
-    }
+    // if (plot.ndviScore != null && Number(plot.ndviScore) >= 0.6) {
+    //   score += 5;
+    //   reasoning.push('NDVI favorable');
+    // }
     const expectedYield = seed.yieldPotential != null ? Number(seed.yieldPotential) : null;
     return {
       compatibilityScore: Math.min(99, score),

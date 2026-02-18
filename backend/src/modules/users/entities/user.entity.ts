@@ -9,29 +9,36 @@ export enum UserRole {
     SUPER_ADMIN = 'super_admin',
 }
 
-@Entity('users')
+@Entity('utilisateurs')
 export class User {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'id_user' })
     id: number;
 
     @Column({ unique: true })
     email: string;
 
-    @Column({ name: 'password_hash', nullable: true })
+    @Column({ name: 'mot_de_passe', nullable: true })
     passwordHash: string;
 
-    @Column({ name: 'first_name', nullable: true })
+    @Column({ name: 'prenom', nullable: true })
     firstName: string;
 
-    @Column({ name: 'last_name', nullable: true })
+    @Column({ name: 'nom', nullable: true })
     lastName: string;
 
-    @Column({ nullable: true })
+    @Column({ name: 'telephone', nullable: true })
     phone: string;
 
     @Column({ type: 'enum', enum: UserRole, default: UserRole.FARMER })
     role: UserRole;
 
+    // Columns below do not exist in schema.sql yet, marking distinctively or removing if strict
+    // For now keeping them might cause issues if synchronize is false. 
+    // Checking schema.sql, 'utilisateurs' has: id_user, nom, prenom, email, mot_de_passe, role, telephone, date_creation, updated_at.
+    // google_id, profile_picture, is_verified, last_login are NOT in schema.sql.
+    // I must comment them out or schemas wont match.
+
+    /* 
     @Column({ name: 'is_verified', default: false })
     isVerified: boolean;
 
@@ -40,17 +47,17 @@ export class User {
 
     @Column({ name: 'profile_picture', nullable: true })
     profilePicture: string;
+    
+    @Column({ name: 'last_login', nullable: true })
+    lastLogin: Date;
+    */
 
-    @CreateDateColumn({ name: 'created_at' })
+    @CreateDateColumn({ name: 'date_creation' })
     createdAt: Date;
 
     @UpdateDateColumn({ name: 'updated_at' })
     updatedAt: Date;
 
-    @Column({ name: 'last_login', nullable: true })
-    lastLogin: Date;
-
-    // Relations will be added as other entities are created
     @OneToMany(() => Plot, (plot) => plot.user)
     plots: Plot[];
 }

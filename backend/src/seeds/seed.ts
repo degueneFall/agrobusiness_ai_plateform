@@ -4,6 +4,7 @@ import { DataSource } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User, UserRole } from '../modules/users/entities/user.entity';
 import { Region } from '../modules/system-admin/entities/region.entity';
+import { Zone } from '../modules/system-admin/entities/zone.entity';
 import { Seed, CropType, WaterRequirement } from '../modules/seeds/entities/seed.entity';
 import { AiModel, AiModelType } from '../modules/ai-admin/entities/ai-model.entity';
 import { Plot, SoilType } from '../modules/plots/entities/plot.entity';
@@ -19,15 +20,15 @@ async function bootstrap() {
     // 1. Regions
     const regionRepo = dataSource.getRepository(Region);
     const regions = [
-        { name: 'Dakar', code: 'DK', country: 'Sénégal', climateZone: 'Sahélien', averageRainfall: 450.00 },
-        { name: 'Thiès', code: 'TH', country: 'Sénégal', climateZone: 'Sahélien', averageRainfall: 500.00 },
-        { name: 'Saint-Louis', 'code': 'SL', country: 'Sénégal', climateZone: 'Sahélien', averageRainfall: 350.00 },
-        { name: 'Kaolack', code: 'KL', country: 'Sénégal', climateZone: 'Soudano-Sahélien', averageRainfall: 600.00 },
-        { name: 'Ziguinchor', code: 'ZG', country: 'Sénégal', climateZone: 'Soudano-Guinéen', averageRainfall: 1200.00 },
+        { name: 'Dakar', country: 'Sénégal' },
+        { name: 'Thiès', country: 'Sénégal' },
+        { name: 'Saint-Louis', country: 'Sénégal' },
+        { name: 'Kaolack', country: 'Sénégal' },
+        { name: 'Ziguinchor', country: 'Sénégal' },
     ];
 
     for (const regionData of regions) {
-        const exists = await regionRepo.findOneBy({ code: regionData.code });
+        const exists = await regionRepo.findOneBy({ name: regionData.name });
         if (!exists) {
             await regionRepo.save(regionRepo.create(regionData));
             console.log(`Region ${regionData.name} created`);
@@ -46,7 +47,7 @@ async function bootstrap() {
             firstName: 'Admin',
             lastName: 'System',
             role: UserRole.SUPER_ADMIN,
-            isVerified: true,
+            // isVerified: true, // Removed from entity
         });
         await userRepo.save(adminUser);
         console.log('Admin user created');
@@ -62,25 +63,44 @@ async function bootstrap() {
             firstName: 'Agronome',
             lastName: 'Demo',
             role: UserRole.AGRONOMIST,
-            isVerified: true,
+            // isVerified: true, // Removed from entity
         });
         await userRepo.save(agronomeUser);
         console.log('Agronomist user created');
     }
 
     const adminId = adminUser.id;
-    const dakar = await regionRepo.findOneBy({ code: 'DK' });
-    const thies = await regionRepo.findOneBy({ code: 'TH' });
+    const dakar = await regionRepo.findOneBy({ name: 'Dakar' });
+    const thies = await regionRepo.findOneBy({ name: 'Thiès' });
+
+    // 1b. Zones (New requirement as Plots link to Zones)
+    const zoneRepo = dataSource.getRepository(Zone);
+    let dakarZone = await zoneRepo.findOneBy({ nomZone: 'Zone Dakar Nord' });
+    if (dakar && !dakarZone) {
+        dakarZone = zoneRepo.create({ nomZone: 'Zone Dakar Nord', idRegion: dakar.id, typeZone: 'agricole' });
+        await zoneRepo.save(dakarZone);
+        console.log('Zone Dakar Nord created');
+    }
+    let thiesZone = await zoneRepo.findOneBy({ nomZone: 'Zone Thiès Ouest' });
+    if (thies && !thiesZone) {
+        thiesZone = zoneRepo.create({ nomZone: 'Zone Thiès Ouest', idRegion: thies.id, typeZone: 'maraicher' });
+        await zoneRepo.save(thiesZone);
+        console.log('Zone Thiès Ouest created');
+    }
 
     // Plots for admin
     const plotRepo = dataSource.getRepository(Plot);
     const plotCount = await plotRepo.count({ where: { userId: adminId } });
-    if (plotCount === 0 && dakar && thies) {
+    if (plotCount === 0 && dakarZone && thiesZone) {
         const plotsData = [
-            { name: 'Parcelle A-102 (Maïs)', areaHectares: 15.4, regionId: dakar.id, soilType: SoilType.LOAMY, soilPh: 6.8, ndviScore: 0.82 },
-            { name: 'Vignoble Nord B-205', areaHectares: 8.2, regionId: thies.id, soilType: SoilType.LOAMY, soilPh: 6.2, ndviScore: 0.45 },
-            { name: 'Verger Sud C-301', areaHectares: 22.1, regionId: dakar.id, soilType: SoilType.LOAMY, soilPh: 6.9, ndviScore: 0.68 },
+            { name: 'Parcelle A-102 (Maïs)', areaHectares: 15.4, regionId: dakarZone.id }, // Using regionId to hold zoneId as we might have mapped it or just use zone property if possible, but create expects object. 
+            // Wait, Plot entity has 'regionId' property mapped to 'id_zone' column. So passing regionId here effectively sets id_zone. 
+            // But we should be careful. 'regionId' in Plot entity (line 28) maps to 'id_zone'. 
+            // So if we pass dakarZone.id to regionId property, it will work.
+            { name: 'Vignoble Nord B-205', areaHectares: 8.2, regionId: thiesZone.id },
+            { name: 'Verger Sud C-301', areaHectares: 22.1, regionId: dakarZone.id },
         ];
+        // Removed: soilType, soilPh, ndviScore (not in DB)
         for (const p of plotsData) {
             await plotRepo.save(plotRepo.create({ ...p, userId: adminId }));
         }

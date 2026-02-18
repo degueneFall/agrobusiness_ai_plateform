@@ -15,6 +15,10 @@ import AdminIAPage from './pages/dashboards/AdminIAPage';
 import NotificationsPage from './pages/dashboards/NotificationsPage';
 import SeedDetailPage from './pages/dashboards/SeedDetailPage';
 import ParametresPage from './pages/dashboards/ParametresPage';
+import SaisieDonneesSolPage from './pages/dashboards/SaisieDonneesSolPage';
+import DetailParcelePage from './pages/dashboards/DetailParcelePage';
+
+
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -51,6 +55,26 @@ const App: React.FC = () => {
               <PrivateRoute>
                 <DashboardShell title="Cartographie">
                   <CartographiePage />
+                </DashboardShell>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/saisie-donnees-sol"
+            element={
+              <PrivateRoute>
+                <DashboardShell title="Saisie Données Sol">
+                  <SaisieDonneesSolPage />
+                </DashboardShell>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/parcelles/:id"
+            element={
+              <PrivateRoute>
+                <DashboardShell title="Détails Parcelle">
+                  <DetailParcelePage />
                 </DashboardShell>
               </PrivateRoute>
             }
